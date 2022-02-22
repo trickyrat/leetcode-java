@@ -1,3 +1,5 @@
+package com.trickyrat.leetcode;
+
 import java.util.Random;
 
 public class RandomNode {

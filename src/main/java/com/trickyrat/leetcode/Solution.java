@@ -1,4 +1,7 @@
+package com.trickyrat.leetcode;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -201,5 +204,124 @@ public class Solution {
             }
         }
         return segmentCount;
+    }
+
+    /*
+     * 807.Max Increase to Keep City Skyline
+     */
+    public int maxIncreaseKeepingSkyline(int[][] grid) {
+        int n = grid.length;
+        int[] rowMax = new int[n];
+        int[] colMax = new int[n];
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                rowMax[i] = Math.max(rowMax[i], grid[i][j]);
+                colMax[j] = Math.max(colMax[j], grid[i][j]);
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++n) {
+                ans += Math.min(rowMax[i], colMax[j]) - grid[i][j];
+            }
+        }
+        return ans;
+    }
+
+    /**
+     * 838.推多米诺
+     * 
+     * @param dominoes
+     * @return
+     */
+    public String PushDominoes(String dominoes) {
+        char[] s = dominoes.toCharArray();
+        int n = s.length, i = 0;
+        char left = 'L';
+        while (i < n) {
+            int j = i;
+            while (j < n && s[j] == '.') {
+                j++;
+            }
+            char right = j < n ? s[j] : 'R';
+            if (left == right) {
+                while (i < j) {
+                    s[i++] = right;
+                }
+            } else if (left == 'R' && right == 'L') {
+                int k = j - 1;
+                while (i < k) {
+                    s[i++] = 'R';
+                    s[k--] = 'L';
+                }
+            }
+            left = right;
+            i = j + 1;
+        }
+        return new String(s);
+    }
+
+    /**
+     * 846.一手顺子
+     * 
+     * @param hand
+     * @param groupSize
+     * @return
+     */
+    public boolean isNStraightHand(int[] hand, int groupSize) {
+        int n = hand.length;
+        if (n % groupSize != 0) {
+            return false;
+        }
+        Arrays.sort(hand);
+        HashMap<Integer, Integer> count = new HashMap<>();
+        for (int x : hand) {
+            count.put(x, count.getOrDefault(x, 0) + 1);
+        }
+        for (int x : hand) {
+            if (!count.containsKey(x)) {
+                continue;
+            }
+            for (int j = 0; j < groupSize; j++) {
+                int num = x + j;
+                if (!count.containsKey(num)) {
+                    return false;
+                }
+                count.put(num, count.get(num) - 1);
+                if (count.get(num) == 0) {
+                    count.remove(num);
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 1380. 矩阵中的幸运数字
+     * 
+     * @param matrix
+     * @return
+     */
+    public List<Integer> luckyNumbers(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        int[] minRow = new int[m];
+        Arrays.fill(minRow, Integer.MAX_VALUE);
+        int[] maxCol = new int[n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                minRow[i] = Math.min(minRow[i], matrix[i][j]);
+                maxCol[j] = Math.max(maxCol[j], matrix[i][j]);
+            }
+        }
+        List<Integer> res = new ArrayList<Integer>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == minRow[i] && matrix[i][j] == maxCol[j]) {
+                    res.add(matrix[i][j]);
+                }
+            }
+        }
+        return res;
     }
 }
