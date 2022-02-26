@@ -223,6 +223,32 @@ public class Solution {
         return String.format("%d+%di", real1 * real2 - imag2 * imag1, real1 * imag2 + imag1 * real2);
     }
 
+    /**
+     * 553. 最优除法
+     * 
+     * @param nums
+     * @return
+     */
+    public String optimalDivision(int[] nums) {
+        int n = nums.length;
+        if (n == 1) {
+            return String.valueOf(nums[0]);
+        }
+        if (n == 2) {
+            return String.valueOf(nums[0]) + "/" + String.valueOf(nums[1]);
+        }
+        StringBuffer res = new StringBuffer();
+        res.append(nums[0]);
+        res.append("/(");
+        res.append(nums[1]);
+        for (int i = 2; i < n; i++) {
+            res.append("/");
+            res.append(nums[i]);
+        }
+        res.append(")");
+        return res.toString();
+    }
+
     /*
      * 807.Max Increase to Keep City Skyline
      */
