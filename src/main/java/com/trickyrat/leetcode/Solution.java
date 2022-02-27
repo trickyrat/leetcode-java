@@ -367,4 +367,22 @@ public class Solution {
         }
         return res;
     }
+
+    /**
+     * 2006. 差的绝对值为k的数对数目
+     * 
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int countKDifference(int[] nums, int k) {
+        int ans = 0, n = nums.length;
+        Map<Integer, Integer> cnt = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            ans += cnt.getOrDefault(nums[i] - k, 0) + cnt.getOrDefault(nums[i] + k, 0);
+            cnt.put(nums[i], cnt.getOrDefault(nums[i], 0) + 1);
+        }
+        return ans;
+    }
+
 }
