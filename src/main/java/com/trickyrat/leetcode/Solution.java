@@ -108,6 +108,31 @@ public class Solution {
         return ans;
     }
 
+    /**
+     * 6. z字形转换
+     * 
+     * @param s       输入字符串
+     * @param numRows
+     * @return
+     */
+    public String zconvert(String s, int numRows) {
+        int n = s.length(), r = numRows;
+        if (r == 1 || r >= n) {
+            return s;
+        }
+        int t = 2 * r - 2;
+        StringBuffer ans = new StringBuffer();
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < n - i; j += t) {
+                ans.append(s.charAt(j + i));
+                if (0 < i && i < r - 1 && j + t - i < n) {
+                    ans.append(s.charAt(j + t - i));
+                }
+            }
+        }
+        return ans.toString();
+    }
+
     public String modifyString(String s) {
         int n = s.length();
         char[] arr = s.toCharArray();
