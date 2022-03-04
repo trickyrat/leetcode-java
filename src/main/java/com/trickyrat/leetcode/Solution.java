@@ -2,8 +2,10 @@ package com.trickyrat.leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -232,6 +234,35 @@ public class Solution {
             dfs(candidates, target - candidates[idx], ans, combine, idx);
             combine.remove(combine.size() - 1);
         }
+    }
+
+    List<List<Integer>> ret = new LinkedList<List<Integer>>();
+    Deque<Integer> path = new LinkedList<Integer>();
+
+    /**
+     * 113.路径总和
+     * 
+     * @param root
+     * @param targetNum
+     * @return
+     */
+    public List<List<Integer>> pathSum(TreeNode root, int targetNum) {
+        dfs(root, targetNum);
+        return ret;
+    }
+
+    private void dfs(TreeNode root, int targetNum) {
+        if (root == null) {
+            return;
+        }
+        path.offerLast(root.val);
+        targetNum -= root.val;
+        if (root.left == null && root.right == null && targetNum == 0) {
+            ret.add(new LinkedList<Integer>(path));
+        }
+        dfs(root.left, targetNum);
+        dfs(root.right, targetNum);
+        path.pollLast();
     }
 
     /**
