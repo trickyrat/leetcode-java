@@ -282,6 +282,17 @@ public class Solution {
     }
 
     /**
+     * 521.最长特殊序列
+     * 
+     * @param a
+     * @param b
+     * @return
+     */
+    public Integer findLUTLength(String a, String b) {
+        return a.equals(b) ? -1 : Math.max(a.length(), b.length());
+    }
+
+    /**
      * 537. 复数的乘法
      * 
      * @param num1
