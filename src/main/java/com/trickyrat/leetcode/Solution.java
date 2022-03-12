@@ -358,8 +358,51 @@ public class Solution {
         return res.toString();
     }
 
-    /*
+    /**
+     * 589.N叉树的前序遍历
+     * @param root
+     * @return
+     */
+    public List<Integer> preorder(Node root) {
+        List<Integer> ans = new ArrayList<>();
+        preorderHelper(root, ans);
+        return ans;
+    }
+    void preorderHelper(Node root, List<Integer> list) {
+        if(root == null) {
+            return;
+        }
+        list.add(root.val);
+        for(Node ch : root.children) {
+            preorderHelper(ch, list);
+        }
+    }
+
+    /**
+     * 590.N叉树的前序遍历
+     * @param root
+     * @return
+     */
+    public List<Integer> postorder(Node root) {
+        List<Integer> ans = new ArrayList<>();
+        postorderHelper(root, ans);
+        return ans;
+    }
+    void postorderHelper(Node root, List<Integer> list) {
+        if(root == null) {
+            return;
+        }
+        for(Node ch : root.children) {
+            postorderHelper(ch, list);
+        }
+        list.add(root.val);
+    }
+
+
+    /**
      * 807.Max Increase to Keep City Skyline
+     * @param grid
+     * @return
      */
     public int maxIncreaseKeepingSkyline(int[][] grid) {
         int n = grid.length;
