@@ -13,7 +13,7 @@ import java.util.Set;
 public class Solution {
     /**
      * 1. Two Sum
-     * 
+     *
      * @param nums
      * @param target
      * @return
@@ -36,7 +36,7 @@ public class Solution {
 
     /**
      * 2. Add two numbers
-     * 
+     *
      * @param l1
      * @param l2
      * @return
@@ -84,7 +84,7 @@ public class Solution {
 
     /**
      * 3. Longest Substring Without Repeating Characters
-     * 
+     *
      * @param s
      * @return
      */
@@ -112,7 +112,7 @@ public class Solution {
 
     /**
      * 6. z字形转换
-     * 
+     *
      * @param s       输入字符串
      * @param numRows
      * @return
@@ -137,7 +137,7 @@ public class Solution {
 
     /**
      * 7. 整数反转
-     * 
+     *
      * @param x
      * @return
      */
@@ -173,7 +173,7 @@ public class Solution {
 
     /**
      * 38. Count And Say
-     * 
+     *
      * @param n
      * @return
      */
@@ -206,7 +206,7 @@ public class Solution {
 
     /**
      * 39. Combination Sum
-     * 
+     *
      * @param candidates
      * @param target
      * @return
@@ -241,7 +241,7 @@ public class Solution {
 
     /**
      * 113.路径总和
-     * 
+     *
      * @param root
      * @param targetNum
      * @return
@@ -294,7 +294,7 @@ public class Solution {
 
     /**
      * 434. Number of Segments in a String
-     * 
+     *
      * @param s
      * @return
      */
@@ -310,7 +310,7 @@ public class Solution {
 
     /**
      * 504.七进制数
-     * 
+     *
      * @param num
      * @return
      */
@@ -333,7 +333,7 @@ public class Solution {
 
     /**
      * 521.最长特殊序列
-     * 
+     *
      * @param a
      * @param b
      * @return
@@ -344,7 +344,7 @@ public class Solution {
 
     /**
      * 537. 复数的乘法
-     * 
+     *
      * @param num1
      * @param num2
      * @return
@@ -361,7 +361,7 @@ public class Solution {
 
     /**
      * 553. 最优除法
-     * 
+     *
      * @param nums
      * @return
      */
@@ -387,6 +387,7 @@ public class Solution {
 
     /**
      * 589.N叉树的前序遍历
+     *
      * @param root
      * @return
      */
@@ -395,18 +396,20 @@ public class Solution {
         preorderHelper(root, ans);
         return ans;
     }
+
     void preorderHelper(Node root, List<Integer> list) {
-        if(root == null) {
+        if (root == null) {
             return;
         }
         list.add(root.val);
-        for(Node ch : root.children) {
+        for (Node ch : root.children) {
             preorderHelper(ch, list);
         }
     }
 
     /**
      * 590.N叉树的前序遍历
+     *
      * @param root
      * @return
      */
@@ -415,19 +418,48 @@ public class Solution {
         postorderHelper(root, ans);
         return ans;
     }
+
     void postorderHelper(Node root, List<Integer> list) {
-        if(root == null) {
+        if (root == null) {
             return;
         }
-        for(Node ch : root.children) {
+        for (Node ch : root.children) {
             postorderHelper(ch, list);
         }
         list.add(root.val);
     }
 
+    /**
+     * 599.两个列表的最小索引和
+     * @param list1
+     * @param list2
+     * @return
+     */
+    public String[] findRestaurant(String[] list1, String[] list2) {
+        Map<String, Integer> index = new HashMap<>();
+        for (int i = 0; i < list1.length; i++) {
+            index.put(list1[i], i);
+        }
+        List<String> ret = new ArrayList<>();
+        int indexSum = Integer.MAX_VALUE;
+        for (int i = 0; i < list2.length; i++) {
+            if (index.containsKey(list2[i])) {
+                int j = index.get(list2[i]);
+                if (i + j < indexSum) {
+                    ret.clear();
+                    ret.add(list2[i]);
+                    indexSum = i + j;
+                } else if (i + j == indexSum) {
+                    ret.add(list2[i]);
+                }
+            }
+        }
+        return ret.toArray(new String[ret.size()]);
+    }
 
     /**
      * 807.Max Increase to Keep City Skyline
+     *
      * @param grid
      * @return
      */
@@ -453,7 +485,7 @@ public class Solution {
 
     /**
      * 838.推多米诺
-     * 
+     *
      * @param dominoes
      * @return
      */
@@ -486,7 +518,7 @@ public class Solution {
 
     /**
      * 846.一手顺子
-     * 
+     *
      * @param hand
      * @param groupSize
      * @return
@@ -521,7 +553,7 @@ public class Solution {
 
     /**
      * 1380. 矩阵中的幸运数字
-     * 
+     *
      * @param matrix
      * @return
      */
@@ -549,7 +581,7 @@ public class Solution {
 
     /**
      * 2006. 差的绝对值为k的数对数目
-     * 
+     *
      * @param nums
      * @param k
      * @return
