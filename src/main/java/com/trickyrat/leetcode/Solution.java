@@ -431,6 +431,7 @@ public class Solution {
 
     /**
      * 599.两个列表的最小索引和
+     *
      * @param list1
      * @param list2
      * @return
@@ -596,6 +597,44 @@ public class Solution {
         return ans;
     }
 
+
+    /**
+     * 2044. 统计按位或能得到最大值的子集数目
+     *
+     * @param nums
+     * @return
+     */
+    public int countMaxOrSubsets(int[] nums) {
+        this.nums = nums;
+        this.maxOr = 0;
+        this.cnt = 0;
+        dfs(0, 0);
+        return cnt;
+    }
+    int[] nums;
+    int maxOr, cnt;
+
+    private void dfs(int pos, int orVal) {
+        if (pos == nums.length) {
+            if (orVal > maxOr) {
+                maxOr = orVal;
+                cnt = 1;
+            } else if (orVal == maxOr) {
+                cnt++;
+            }
+            return;
+        }
+        dfs(pos + 1, orVal | nums[pos]);
+        dfs(pos + 1, orVal);
+    }
+
+    /**
+     * 2055. 蜡烛之间的盘子
+     *
+     * @param s
+     * @param queries
+     * @return
+     */
     public int[] platesBetweenCandles(String s, int[][] queries) {
         int n = s.length();
         int[] preSum = new int[n];
