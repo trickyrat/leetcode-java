@@ -581,6 +581,23 @@ public class Solution {
     }
 
     /**
+     * 1991.寻找数组的中间位置
+     * @param nums
+     * @return
+     */
+    public int pivotIndex(int[] nums) {
+        int total = Arrays.stream(nums).sum();
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if(2*sum + nums[i] == total) {
+                return i;
+            }
+            sum += nums[i];
+        }
+        return -1;
+    }
+
+    /**
      * 2006. 差的绝对值为k的数对数目
      *
      * @param nums
