@@ -1,14 +1,6 @@
 package com.trickyrat.leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Solution {
     /**
@@ -234,6 +226,34 @@ public class Solution {
             dfs(candidates, target - candidates[idx], ans, combine, idx);
             combine.remove(combine.size() - 1);
         }
+    }
+
+    /**
+     * 111.二叉树的最小深度
+     * @param root
+     * @return
+     */
+    public int minDepth(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        int depth = 1;
+        while(!queue.isEmpty()) {
+            TreeNode curr = queue.poll();
+            if (curr.left == null && curr.right == null) {
+                return depth;
+            }
+            if(curr.left != null) {
+                queue.offer(curr.left);
+            }
+            if(curr.right != null) {
+                queue.offer(curr.right);
+            }
+            depth++;
+        }
+        return depth;
     }
 
     List<List<Integer>> ret = new LinkedList<List<Integer>>();

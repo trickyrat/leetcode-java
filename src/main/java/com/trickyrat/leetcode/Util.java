@@ -17,17 +17,19 @@ public class Util {
     int index = 1;
     while (index < nums.length) {
       TreeNode node = queue.poll();
-      String leftValue = nums[index];
-      String rightValue = nums[index + 1];
-      if (!leftValue.equals("null")) {
-        TreeNode leftNode = new TreeNode(Integer.parseInt(leftValue));
+      if(index > nums.length - 1 || nums[index].equals("null")) {
+        node.left = null;
+      } else {
+        TreeNode leftNode = new TreeNode(Integer.parseInt(nums[index]));
         if (node != null) {
           node.left = leftNode;
         }
         queue.add(leftNode);
       }
-      if (!rightValue.equals("null")) {
-        TreeNode rightNode = new TreeNode(Integer.parseInt(rightValue));
+      if(index + 1 > nums.length - 1 || nums[index+1].equals("null")) {
+        node.right = null;
+      } else {
+        TreeNode rightNode = new TreeNode(Integer.parseInt(nums[index+1]));
         if (node != null) {
           node.right = rightNode;
         }
