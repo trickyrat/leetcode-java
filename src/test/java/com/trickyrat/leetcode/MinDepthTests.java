@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class MinDepthTest {
+public class MinDepthTests {
     private final Solution solution = new Solution();
     private static final Util util = new Util();
 
