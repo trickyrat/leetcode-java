@@ -230,25 +230,26 @@ public class Solution {
 
     /**
      * 111.二叉树的最小深度
+     *
      * @param root
      * @return
      */
     public int minDepth(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return 0;
         }
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.offer(root);
         int depth = 1;
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode curr = queue.poll();
             if (curr.left == null && curr.right == null) {
                 return depth;
             }
-            if(curr.left != null) {
+            if (curr.left != null) {
                 queue.offer(curr.left);
             }
-            if(curr.right != null) {
+            if (curr.right != null) {
                 queue.offer(curr.right);
             }
             depth++;
@@ -480,26 +481,27 @@ public class Solution {
 
     /**
      * 682.棒球比赛
+     *
      * @param ops
      * @return
      */
     public int calPoints(String[] ops) {
         int ret = 0;
         List<Integer> points = new ArrayList<Integer>();
-        for(String op: ops) {
+        for (String op : ops) {
             int n = points.size();
             switch (op.charAt(0)) {
                 case '+':
-                    ret += points.get(n-1) + points.get(n - 2);
-                    points.add(points.get(n-1) + points.get(n-2));
+                    ret += points.get(n - 1) + points.get(n - 2);
+                    points.add(points.get(n - 1) + points.get(n - 2));
                     break;
                 case 'D':
-                    ret += 2 * points.get(n-1);
-                    points.add(2*points.get(n-1));
+                    ret += 2 * points.get(n - 1);
+                    points.add(2 * points.get(n - 1));
                     break;
                 case 'C':
-                    ret -= points.get(n-1);
-                    points.remove(n-1);
+                    ret -= points.get(n - 1);
+                    points.remove(n - 1);
                     break;
                 default:
                     ret += Integer.parseInt(op);
@@ -508,6 +510,29 @@ public class Solution {
             }
         }
         return ret;
+    }
+
+    /**
+     * 804.唯一摩尔斯密码词
+     *
+     * @param words
+     * @return
+     */
+    public int uniqueMorseRepresentations(String[] words) {
+        String[] MORSE = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+                "....", "..", ".---", "-.-", ".-..", "--", "-.",
+                "---", ".--.", "--.-", ".-.", "...", "-", "..-",
+                "...-", ".--", "-..-", "-.--", "--.."};
+        Set<String> seen = new HashSet<>();
+        for (String word : words) {
+            StringBuilder code = new StringBuilder();
+            for (int i = 0; i < word.length(); i++) {
+                char c = word.charAt(i);
+                code.append(MORSE[c - 'a']);
+            }
+            seen.add(code.toString());
+        }
+        return seen.size();
     }
 
     /**
@@ -634,6 +659,7 @@ public class Solution {
 
     /**
      * 1991.寻找数组的中间位置
+     *
      * @param nums
      * @return
      */
@@ -641,7 +667,7 @@ public class Solution {
         int total = Arrays.stream(nums).sum();
         int sum = 0;
         for (int i = 0; i < nums.length; i++) {
-            if(2*sum + nums[i] == total) {
+            if (2 * sum + nums[i] == total) {
                 return i;
             }
             sum += nums[i];
@@ -680,6 +706,7 @@ public class Solution {
         dfs(0, 0);
         return cnt;
     }
+
     int[] nums;
     int maxOr, cnt;
 
