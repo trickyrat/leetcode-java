@@ -287,6 +287,26 @@ public class Solution {
     }
 
     /**
+     * 357. 统计各位数字都不同的数字个数
+     * @param n
+     * @return
+     */
+    public int countNumbersWithUniqueDigits(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return 10;
+        }
+        int res = 10, cur = 9;
+        for (int i = 0; i < n - 1; i++) {
+            cur *= 9 - i;
+            res += cur;
+        }
+        return res;
+    }
+
+    /**
      * 393. UTF-8编码验证
      *
      * @param data
@@ -536,6 +556,50 @@ public class Solution {
     }
 
     /**
+     * 804.唯一摩尔斯密码词
+     *
+     * @param words
+     * @return
+     */
+    public int uniqueMorseRepresentations(String[] words) {
+        String[] MORSE = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+                "....", "..", ".---", "-.-", ".-..", "--", "-.",
+                "---", ".--.", "--.-", ".-.", "...", "-", "..-",
+                "...-", ".--", "-..-", "-.--", "--.."};
+        Set<String> seen = new HashSet<>();
+        for (String word : words) {
+            StringBuilder code = new StringBuilder();
+            for (int i = 0; i < word.length(); i++) {
+                char c = word.charAt(i);
+                code.append(MORSE[c - 'a']);
+            }
+            seen.add(code.toString());
+        }
+        return seen.size();
+    }
+
+    /**
+     * 806. 写字符串需要的行数
+     *
+     * @param widths
+     * @param s
+     * @return
+     */
+    public int[] numberOfLines(int[] widths, String s) {
+        final int MAX_WIDTH = 100;
+        int lines = 1, width = 0;
+        for (char c : s.toCharArray()) {
+            int need = widths[c - 'a'];
+            width += need;
+            if (width > MAX_WIDTH) {
+                width = need;
+                lines++;
+            }
+        }
+        return new int[]{lines, width};
+    }
+
+    /**
      * 807.Max Increase to Keep City Skyline
      *
      * @param grid
@@ -706,7 +770,6 @@ public class Solution {
         dfs(0, 0);
         return cnt;
     }
-
     int[] nums;
     int maxOr, cnt;
 
