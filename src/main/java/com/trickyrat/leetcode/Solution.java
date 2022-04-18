@@ -307,6 +307,28 @@ public class Solution {
     }
 
     /**
+     * 386. 字典序排数
+     * @param n
+     * @return
+     */
+    public List<Integer> lexicalOrder(int n) {
+        List<Integer> ret = new ArrayList<>();
+        int num = 1;
+        for (int i = 0; i < n; ++i) {
+            ret.add(num);
+            if(num * 10 <= n) {
+                num *= 10;
+            } else {
+                while(num % 10 == 9 || num + 1 > n) {
+                    num /= 10;
+                }
+                num++;
+            }
+        }
+        return ret;
+    }
+
+    /**
      * 393. UTF-8编码验证
      *
      * @param data
