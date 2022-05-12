@@ -782,6 +782,26 @@ public class Solution {
     }
 
     /**
+     * 944. Delete Columns to Make Sorted
+     * @param strs
+     * @return
+     */
+    public int minDeletionSize(String[] strs) {
+        int row = strs.length;
+        int col = strs[0].length();
+        int ans = 0;
+        for (int j = 0; j < col; ++j) {
+            for (int i = 1; i < row; ++i) {
+                if(strs[i-1].charAt(j) > strs[i].charAt(j)) {
+                    ans++;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+
+    /**
      * 1380. 矩阵中的幸运数字
      *
      * @param matrix
