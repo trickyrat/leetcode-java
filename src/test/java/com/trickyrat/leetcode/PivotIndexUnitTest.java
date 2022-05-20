@@ -7,20 +7,20 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class MinDepthTests {
+public class PivotIndexUnitTest {
     private final Solution solution = new Solution();
-    private static final Util util = new Util();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(TreeNode input, int expect) {
-        int actual = solution.minDepth(input);
+    public void test(int[] input, int expect) {
+        int actual = solution.pivotIndex(input);
         Assertions.assertEquals(expect, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(util.createTreeNodeWithBFS("3,9,20,null,null,15,7"), 2),
-                Arguments.arguments(util.createTreeNodeWithBFS("2,null,3,null,4,null,5,null,6"), 5));
+                Arguments.arguments(new int[]{1, 7, 3, 6, 5, 6}, 3),
+                Arguments.arguments(new int[]{1, -1, 4}, 2),
+                Arguments.arguments(new int[]{2, 5}, -1));
     }
 }

@@ -7,20 +7,18 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class PivotIndexTests {
+public class MostCommonWordUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int[] input, int expect) {
-        int actual = solution.pivotIndex(input);
+    public void test(String words, String[] banned, String expect) {
+        String actual = solution.mostCommonWord(words, banned);
         Assertions.assertEquals(expect, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(new int[]{1, 7, 3, 6, 5, 6}, 3),
-                Arguments.arguments(new int[]{1, -1, 4}, 2),
-                Arguments.arguments(new int[]{2, 5}, -1));
+                Arguments.arguments("Bob hit a ball, the hit BALL flew far after it was hit.", new String[]{"hit"}, "ball"));
     }
 }

@@ -801,6 +801,16 @@ public class Solution {
         return ans;
     }
 
+    public int repeatedNTimes(int[] nums) {
+        Set<Integer> found = new HashSet<Integer>();
+        for(int num : nums) {
+            if(!found.add(num)) {
+                return num;
+            }
+        }
+        return -1;
+    }
+
     /**
      * 1380. 矩阵中的幸运数字
      *

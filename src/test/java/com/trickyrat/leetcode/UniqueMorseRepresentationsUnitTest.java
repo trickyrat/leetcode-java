@@ -7,18 +7,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class MostCommonWordTests {
+public class UniqueMorseRepresentationsUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(String words, String[] banned, String expect) {
-        String actual = solution.mostCommonWord(words, banned);
+    public void test(String[] words, int expect) {
+        int actual = solution.uniqueMorseRepresentations(words);
         Assertions.assertEquals(expect, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments("Bob hit a ball, the hit BALL flew far after it was hit.", new String[]{"hit"}, "ball"));
+                Arguments.arguments(new String[]{"gin", "zen", "gig", "msg"}, 2),
+                Arguments.arguments(new String[]{"a"}, 1));
     }
 }

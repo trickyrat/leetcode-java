@@ -7,19 +7,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class LongestWordTests {
+public class CountNumbersWithUniqueDigitsUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(String[] ops, String expect) {
-        String actual = solution.longestWord(ops);
+    public void test(int input, int expect) {
+        int actual = solution.countNumbersWithUniqueDigits(input);
         Assertions.assertEquals(expect, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(new String[]{"w","wo","wor","worl", "world"}, "world"),
-                Arguments.arguments(new String[]{"a", "banana", "app", "appl", "ap", "apply", "apple"}, "apple"));
+                Arguments.arguments(2, 91),
+                Arguments.arguments(0, 1));
     }
 }

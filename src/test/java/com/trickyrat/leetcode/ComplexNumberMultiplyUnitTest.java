@@ -7,18 +7,19 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class OptimalDivisionTests {
+public class ComplexNumberMultiplyUnitTest {
   private final Solution solution = new Solution();
 
   @ParameterizedTest
   @MethodSource("getData")
-  public void test(int[] nums, String expected) {
-    String actual = solution.optimalDivision(nums);
+  public void test(String num1, String num2, String expected) {
+    String actual = solution.complexNumberMultiply(num1, num2);
     Assertions.assertEquals(expected, actual);
   }
 
   static Stream<Arguments> getData() {
     return Stream.of(
-        Arguments.arguments(new int[] { 1000, 100, 10, 2 }, "1000/(100/10/2)"));
+        Arguments.arguments("1+1i", "1+1i", "0+2i"),
+        Arguments.arguments("1+-1i", "1+-1i", "0+-2i"));
   }
 }
