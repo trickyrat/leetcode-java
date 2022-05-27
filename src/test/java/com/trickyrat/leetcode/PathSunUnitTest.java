@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class PathSunUnitTest {
   private final Solution solution = new Solution();
-  private static final Util util = new Util();
+  private static final Utilities util = new Utilities();
 
   @ParameterizedTest
   @MethodSource("getData")

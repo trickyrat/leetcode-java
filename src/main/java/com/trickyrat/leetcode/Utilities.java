@@ -5,8 +5,32 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class Util {
-  public TreeNode createTreeNodeWithBFS(String data) {
+public class Utilities {
+
+  public static ListNode createListNode(int[] nums) {
+    ListNode head = new ListNode(0);
+    ListNode dummyHead = head;
+    for(int num : nums) {
+      dummyHead.next = new ListNode(num);
+      dummyHead = dummyHead.next;
+    }
+    return head.next;
+  }
+
+  public static String ListNodeToString(ListNode head) {
+    StringBuilder ret = new StringBuilder();
+    while(head != null) {
+      if(head.next == null) {
+        ret.append(head.val);
+      } else {
+        ret.append(head.val).append("->");
+      }
+      head = head.next;
+    }
+    return ret.toString();
+  }
+
+  public static TreeNode createTreeNodeWithBFS(String data) {
     String[] nums = data.split(",");
     if (nums[0].equals("null")) {
       return null;
@@ -40,13 +64,13 @@ public class Util {
     return root;
   }
 
-  public TreeNode createTreeNodeWithDFS(String data) {
+  public static TreeNode createTreeNodeWithDFS(String data) {
     String[] dataArray = data.split(",");
     List<String> dataList = new LinkedList<String>(Arrays.asList(dataArray));
     return dfs(dataList);
   }
 
-  private TreeNode dfs(List<String> dataList) {
+  private static TreeNode dfs(List<String> dataList) {
     if (dataList.get(0).equals("null")) {
       dataList.remove(0);
       return null;
