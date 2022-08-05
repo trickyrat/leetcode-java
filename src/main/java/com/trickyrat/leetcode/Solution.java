@@ -859,6 +859,26 @@ public class Solution {
     }
 
     /**
+     * 1403. Minimum Subsequence in Non-Increasing Order
+     * @param nums
+     * @return
+     */
+    public List<Integer> minSubsequence(int[] nums) {
+        int total = Arrays.stream(nums).sum();
+        Arrays.sort(nums);
+        List<Integer> ans = new ArrayList<>();
+        int curr = 0;
+        for (int i = nums.length - 1; i >= 0; --i) {
+            curr += nums[i];
+            ans.add(nums[i]);
+            if (total - curr < curr) {
+                break;
+            }
+        }
+        return ans;
+    }
+
+    /**
      * 1823. Find the Winner of the Circular Game
      * @param n
      * @param k
