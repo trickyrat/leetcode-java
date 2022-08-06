@@ -879,6 +879,24 @@ public class Solution {
     }
 
     /**
+     * 1408. String Matching in an Array
+     * @param words
+     * @return
+     */
+    public List<String> stringMatching(String[] words) {
+        List<String> res = new ArrayList<>();
+        for(int i = 0; i < words.length; ++i) {
+            for(int j = 0; j < words.length; ++j) {
+                if(i != j && words[j].contains(words[i])) {
+                    res.add(words[i]);
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
      * 1823. Find the Winner of the Circular Game
      * @param n
      * @param k
