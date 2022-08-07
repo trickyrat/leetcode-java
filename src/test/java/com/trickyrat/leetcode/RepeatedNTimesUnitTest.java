@@ -7,20 +7,20 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class CountMaxOrSubsetsTests {
+public class RepeatedNTimesUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int[] input, int expect) {
-        int actual = solution.countMaxOrSubsets(input);
-        Assertions.assertEquals(expect, actual);
+    public void test(int[] nums, int expected) {
+        int actual = solution.repeatedNTimes(nums);
+        Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(new int[]{3, 1}, 2),
-                Arguments.arguments(new int[]{2, 2, 2}, 7),
-                Arguments.arguments(new int[]{3, 2, 1, 5}, 6));
+                Arguments.arguments(new int[]{1, 2, 3, 3}, 3),
+                Arguments.arguments(new int[]{2, 1, 2, 5, 3, 2}, 2),
+                Arguments.arguments(new int[]{5, 1, 5, 2, 5, 3, 5, 4}, 5));
     }
 }

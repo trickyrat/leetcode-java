@@ -372,6 +372,25 @@ public class Solution {
     }
 
     /**
+     * 467. Unique Substrings in Wraparound String
+     * @param p
+     * @return
+     */
+    public int findSubstringInWraparoundString(String p) {
+        int[] dp = new int[26];
+        int k = 0;
+        for(int i = 0; i < p.length(); ++i) {
+            if(i>0&&(p.charAt(i) - p.charAt(i-1) + 26) % 26 == 1) {
+                ++k;
+            } else {
+                k = 1;
+            }
+            dp[p.charAt(i) - 'a'] = Math.max(dp[p.charAt(i) - 'a'], k);
+        }
+        return Arrays.stream(dp).sum();
+    }
+
+    /**
      * 504.七进制数
      *
      * @param num
@@ -757,6 +776,61 @@ public class Solution {
     }
 
     /**
+     * 905. 按奇偶排序数组
+     * @param nums
+     * @return
+     */
+    public int[] sortArrayByParity(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        while(left < right) {
+            while(left < right && nums[left] % 2 == 0) {
+                left++;
+            }
+            while(left < right && nums[right] % 2 == 1) {
+                right++;
+            }
+            if(left < right) {
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
+                left++;
+                right--;
+            }
+        }
+        return nums;
+    }
+
+    /**
+     * 944. Delete Columns to Make Sorted
+     * @param strs
+     * @return
+     */
+    public int minDeletionSize(String[] strs) {
+        int row = strs.length;
+        int col = strs[0].length();
+        int ans = 0;
+        for (int j = 0; j < col; ++j) {
+            for (int i = 1; i < row; ++i) {
+                if(strs[i-1].charAt(j) > strs[i].charAt(j)) {
+                    ans++;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+
+    public int repeatedNTimes(int[] nums) {
+        Set<Integer> found = new HashSet<Integer>();
+        for(int num : nums) {
+            if(!found.add(num)) {
+                return num;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * 1380. 矩阵中的幸运数字
      *
      * @param matrix
@@ -782,6 +856,58 @@ public class Solution {
             }
         }
         return res;
+    }
+
+    /**
+     * 1403. Minimum Subsequence in Non-Increasing Order
+     * @param nums
+     * @return
+     */
+    public List<Integer> minSubsequence(int[] nums) {
+        int total = Arrays.stream(nums).sum();
+        Arrays.sort(nums);
+        List<Integer> ans = new ArrayList<>();
+        int curr = 0;
+        for (int i = nums.length - 1; i >= 0; --i) {
+            curr += nums[i];
+            ans.add(nums[i]);
+            if (total - curr < curr) {
+                break;
+            }
+        }
+        return ans;
+    }
+
+    /**
+     * 1408. String Matching in an Array
+     * @param words
+     * @return
+     */
+    public List<String> stringMatching(String[] words) {
+        List<String> res = new ArrayList<>();
+        for(int i = 0; i < words.length; ++i) {
+            for(int j = 0; j < words.length; ++j) {
+                if(i != j && words[j].contains(words[i])) {
+                    res.add(words[i]);
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 1823. Find the Winner of the Circular Game
+     * @param n
+     * @param k
+     * @return
+     */
+    public int findTheWinner(int n, int k) {
+        int winner = 1;
+        for (int i = 2; i <= n; ++i) {
+            winner = (k + winner - 1) % i + 1;
+        }
+        return winner;
     }
 
     /**

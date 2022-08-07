@@ -5,22 +5,23 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
-public class MinDepthTests {
+public class LexicalOrderUnitTest {
     private final Solution solution = new Solution();
-    private static final Util util = new Util();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(TreeNode input, int expect) {
-        int actual = solution.minDepth(input);
-        Assertions.assertEquals(expect, actual);
+    public void test(int n, List<Integer> expected) {
+        List<Integer> actual = solution.lexicalOrder(n);
+        Assertions.assertIterableEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(util.createTreeNodeWithBFS("3,9,20,null,null,15,7"), 2),
-                Arguments.arguments(util.createTreeNodeWithBFS("2,null,3,null,4,null,5,null,6"), 5));
+                Arguments.arguments(13, Arrays.asList(1,10,11,12,13,2,3,4,5,6,7,8,9)),
+                Arguments.arguments(2, Arrays.asList(1,2)));
     }
 }

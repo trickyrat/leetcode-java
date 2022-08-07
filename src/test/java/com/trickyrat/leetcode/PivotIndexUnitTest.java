@@ -7,20 +7,20 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class CalPointsTests {
+public class PivotIndexUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(String[] ops, int expect) {
-        int actual = solution.calPoints(ops);
+    public void test(int[] input, int expect) {
+        int actual = solution.pivotIndex(input);
         Assertions.assertEquals(expect, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(new String[]{"5","2","C","D","+"}, 30),
-                Arguments.arguments(new String[]{"5","-2","4","C","D","9","+","+"}, 27),
-                Arguments.arguments(new String[]{"1"}, 1));
+                Arguments.arguments(new int[]{1, 7, 3, 6, 5, 6}, 3),
+                Arguments.arguments(new int[]{1, -1, 4}, 2),
+                Arguments.arguments(new int[]{2, 5}, -1));
     }
 }

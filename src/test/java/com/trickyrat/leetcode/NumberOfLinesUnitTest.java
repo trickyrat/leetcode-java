@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class NumberOfLinesTests {
+public class NumberOfLinesUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest

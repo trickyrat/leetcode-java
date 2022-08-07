@@ -7,20 +7,18 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class CountKDifferenceTests {
+public class OptimalDivisionUnitTest {
   private final Solution solution = new Solution();
 
   @ParameterizedTest
   @MethodSource("getData")
-  public void test(int[] nums, int k, int expected) {
-    int actual = solution.countKDifference(nums, k);
+  public void test(int[] nums, String expected) {
+    String actual = solution.optimalDivision(nums);
     Assertions.assertEquals(expected, actual);
   }
 
   static Stream<Arguments> getData() {
     return Stream.of(
-        Arguments.arguments(new int[] { 1, 2, 2, 1 }, 1, 4),
-        Arguments.arguments(new int[] { 1, 3 }, 3, 0),
-        Arguments.arguments(new int[] { 3, 2, 1, 5, 4 }, 2, 3));
+        Arguments.arguments(new int[] { 1000, 100, 10, 2 }, "1000/(100/10/2)"));
   }
 }

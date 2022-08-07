@@ -7,20 +7,20 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class ZConvertTests {
+public class CountKDifferenceUnitTest {
   private final Solution solution = new Solution();
 
   @ParameterizedTest
   @MethodSource("getData")
-  public void test(String s, int numRows, String expected) {
-    String actual = solution.zconvert(s, numRows);
+  public void test(int[] nums, int k, int expected) {
+    int actual = solution.countKDifference(nums, k);
     Assertions.assertEquals(expected, actual);
   }
 
   static Stream<Arguments> getData() {
     return Stream.of(
-        Arguments.arguments("PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"),
-        Arguments.arguments("PAYPALISHIRING", 4, "PINALSIGYAHRPI"),
-        Arguments.arguments("A", 1, "A"));
+        Arguments.arguments(new int[] { 1, 2, 2, 1 }, 1, 4),
+        Arguments.arguments(new int[] { 1, 3 }, 3, 0),
+        Arguments.arguments(new int[] { 3, 2, 1, 5, 4 }, 2, 3));
   }
 }

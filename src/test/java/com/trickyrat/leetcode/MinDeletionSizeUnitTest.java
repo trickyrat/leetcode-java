@@ -7,19 +7,20 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class CountNumbersWithUniqueDigitsTests {
+public class MinDeletionSizeUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int input, int expect) {
-        int actual = solution.countNumbersWithUniqueDigits(input);
-        Assertions.assertEquals(expect, actual);
+    public void test(String[] strs, int expected) {
+        var actual = solution.minDeletionSize(strs);
+        Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(2, 91),
-                Arguments.arguments(0, 1));
+                Arguments.arguments(new String[]{"cba", "daf", "ghi"}, 1),
+                Arguments.arguments(new String[]{"a", "b"}, 0),
+                Arguments.arguments(new String[]{"zyx", "wvu", "tsr"}, 3));
     }
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class FindRestaurantTests {
+public class FindRestaurantUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
