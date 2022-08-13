@@ -13,7 +13,7 @@ public class ZConvertUnitTest {
   @ParameterizedTest
   @MethodSource("getData")
   public void test(String s, int numRows, String expected) {
-    String actual = solution.zconvert(s, numRows);
+    String actual = solution.zConvert(s, numRows);
     Assertions.assertEquals(expected, actual);
   }
 

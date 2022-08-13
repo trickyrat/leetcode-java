@@ -81,35 +81,30 @@ public class Solution {
      * @return
      */
     public int lengthOfLongestSubstring(String s) {
-        // 哈希集合，记录每个字符是否出现过
-        Set<Character> occ = new HashSet<Character>();
+        Set<Character> occ = new HashSet<>();
         int n = s.length();
-        // 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
         int rk = -1, ans = 0;
         for (int i = 0; i < n; ++i) {
             if (i != 0) {
-                // 左指针向右移动一格，移除一个字符
                 occ.remove(s.charAt(i - 1));
             }
             while (rk + 1 < n && !occ.contains(s.charAt(rk + 1))) {
-                // 不断地移动右指针
                 occ.add(s.charAt(rk + 1));
                 ++rk;
             }
-            // 第 i 到 rk 个字符是一个极长的无重复字符子串
             ans = Math.max(ans, rk - i + 1);
         }
         return ans;
     }
 
     /**
-     * 6. z字形转换
+     * 6. Zigzag Convert
      *
-     * @param s       输入字符串
+     * @param s
      * @param numRows
      * @return
      */
-    public String zconvert(String s, int numRows) {
+    public String zConvert(String s, int numRows) {
         int n = s.length(), r = numRows;
         if (r == 1 || r >= n) {
             return s;
@@ -128,7 +123,7 @@ public class Solution {
     }
 
     /**
-     * 7. 整数反转
+     * 7. Reverse Integer
      *
      * @param x
      * @return
@@ -144,23 +139,6 @@ public class Solution {
             res = res * 10 + digit;
         }
         return res;
-    }
-
-    public String modifyString(String s) {
-        int n = s.length();
-        char[] arr = s.toCharArray();
-        for (int i = 0; i < n; i++) {
-            if (arr[i] == '?') {
-                for (char ch = 'a'; ch <= 'c'; ch++) {
-                    if ((i > 0 && arr[i - 1] == ch) || (i < n - 1 && arr[i + 1] == ch)) {
-                        continue;
-                    }
-                    arr[i] = ch;
-                    break;
-                }
-            }
-        }
-        return new String(arr);
     }
 
     /**
@@ -229,7 +207,7 @@ public class Solution {
     }
 
     /**
-     * 111.二叉树的最小深度
+     * 111. Minimum Depth of Binary Tree
      *
      * @param root
      * @return
@@ -238,7 +216,7 @@ public class Solution {
         if (root == null) {
             return 0;
         }
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         int depth = 1;
         while (!queue.isEmpty()) {
@@ -257,11 +235,11 @@ public class Solution {
         return depth;
     }
 
-    List<List<Integer>> ret = new LinkedList<List<Integer>>();
-    Deque<Integer> path = new LinkedList<Integer>();
+    List<List<Integer>> ret = new LinkedList<>();
+    Deque<Integer> path = new LinkedList<>();
 
     /**
-     * 113.路径总和
+     * 113. Path Sum II
      *
      * @param root
      * @param targetNum
@@ -287,7 +265,7 @@ public class Solution {
     }
 
     /**
-     * 357. 统计各位数字都不同的数字个数
+     * 357. Count Numbers with Unique Digits
      * @param n
      * @return
      */
@@ -307,7 +285,7 @@ public class Solution {
     }
 
     /**
-     * 386. 字典序排数
+     * 386. Lexicographical Numbers
      * @param n
      * @return
      */
@@ -329,7 +307,7 @@ public class Solution {
     }
 
     /**
-     * 393. UTF-8编码验证
+     * 393. UTF-8 Validation
      *
      * @param data
      * @return
@@ -391,7 +369,7 @@ public class Solution {
     }
 
     /**
-     * 504.七进制数
+     * 504. Base 7
      *
      * @param num
      * @return
@@ -414,7 +392,7 @@ public class Solution {
     }
 
     /**
-     * 521.最长特殊序列
+     * 521. Longest Uncommon Subsequence I
      *
      * @param a
      * @param b
@@ -425,7 +403,7 @@ public class Solution {
     }
 
     /**
-     * 537. 复数的乘法
+     * 537. Complex Number Multiplication
      *
      * @param num1
      * @param num2
@@ -442,7 +420,7 @@ public class Solution {
     }
 
     /**
-     * 553. 最优除法
+     * 553. Optimal Division
      *
      * @param nums
      * @return
@@ -468,7 +446,7 @@ public class Solution {
     }
 
     /**
-     * 589.N叉树的前序遍历
+     * 589. N-ary Tree Preorder Traversal
      *
      * @param root
      * @return
@@ -490,7 +468,7 @@ public class Solution {
     }
 
     /**
-     * 590.N叉树的前序遍历
+     * 590. N-ary Tree Postorder Traversal
      *
      * @param root
      * @return
@@ -512,7 +490,7 @@ public class Solution {
     }
 
     /**
-     * 599.两个列表的最小索引和
+     * 599. Minimum Index Sum of Two Lists
      *
      * @param list1
      * @param list2
@@ -541,7 +519,7 @@ public class Solution {
     }
 
     /**
-     * 682.棒球比赛
+     * 682. Baseball Game
      *
      * @param ops
      * @return
@@ -574,7 +552,7 @@ public class Solution {
     }
 
     /**
-     * 720.词典中最长的单词
+     * 720. Longest Word in Dictionary
      *
      * @param words
      * @return
@@ -597,7 +575,7 @@ public class Solution {
     }
 
     /**
-     * 804.唯一摩尔斯密码词
+     * 804. Unique Morse Code Words
      *
      * @param words
      * @return
@@ -620,7 +598,7 @@ public class Solution {
     }
 
     /**
-     * 806. 写字符串需要的行数
+     * 806. Number of Lines To Write String
      *
      * @param widths
      * @param s
@@ -659,7 +637,7 @@ public class Solution {
         }
         int ans = 0;
         for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++n) {
+            for (int j = 0; j < n; ++j) {
                 ans += Math.min(rowMax[i], colMax[j]) - grid[i][j];
             }
         }
@@ -667,7 +645,7 @@ public class Solution {
     }
 
     /**
-     * 819. 最常见的单词
+     * 819. Most Common Word
      * @param paragraph
      * @param banned
      * @return
@@ -708,7 +686,7 @@ public class Solution {
     }
 
     /**
-     * 838.推多米诺
+     * 838. Push Dominoes
      *
      * @param dominoes
      * @return
@@ -741,7 +719,7 @@ public class Solution {
     }
 
     /**
-     * 846.一手顺子
+     * 846. Hand of Straights
      *
      * @param hand
      * @param groupSize
@@ -776,7 +754,7 @@ public class Solution {
     }
 
     /**
-     * 905. 按奇偶排序数组
+     * 905. Sort Array By Parity
      * @param nums
      * @return
      */
@@ -820,6 +798,11 @@ public class Solution {
         return ans;
     }
 
+    /**
+     * 961. N-Repeated Element in Size 2N Array
+     * @param nums
+     * @return
+     */
     public int repeatedNTimes(int[] nums) {
         Set<Integer> found = new HashSet<Integer>();
         for(int num : nums) {
@@ -831,7 +814,7 @@ public class Solution {
     }
 
     /**
-     * 1380. 矩阵中的幸运数字
+     * 1380. Lucky Numbers in a Matrix
      *
      * @param matrix
      * @return
@@ -847,7 +830,7 @@ public class Solution {
                 maxCol[j] = Math.max(maxCol[j], matrix[i][j]);
             }
         }
-        List<Integer> res = new ArrayList<Integer>();
+        List<Integer> res = new ArrayList<>();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (matrix[i][j] == minRow[i] && matrix[i][j] == maxCol[j]) {
@@ -897,6 +880,29 @@ public class Solution {
     }
 
     /**
+     * 1576. Replace All ?'s to Avoid Consecutive Repeating Characters
+     * @param s
+     * @return
+     */
+    public String modifyString(String s) {
+        int n = s.length();
+        char[] arr = s.toCharArray();
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == '?') {
+                for (char ch = 'a'; ch <= 'c'; ch++) {
+                    if ((i > 0 && arr[i - 1] == ch) || (i < n - 1 && arr[i + 1] == ch)) {
+                        continue;
+                    }
+                    arr[i] = ch;
+                    break;
+                }
+            }
+        }
+        return new String(arr);
+    }
+
+
+    /**
      * 1823. Find the Winner of the Circular Game
      * @param n
      * @param k
@@ -911,7 +917,7 @@ public class Solution {
     }
 
     /**
-     * 1991.寻找数组的中间位置
+     * 1991. Find the Middle Index in Array
      *
      * @param nums
      * @return
@@ -929,7 +935,7 @@ public class Solution {
     }
 
     /**
-     * 2006. 差的绝对值为k的数对数目
+     * 2006. Count Number of Pairs With Absolute Difference K
      *
      * @param nums
      * @param k
@@ -947,7 +953,7 @@ public class Solution {
 
 
     /**
-     * 2044. 统计按位或能得到最大值的子集数目
+     * 2044. Count Number of Maximum Bitwise-OR Subsets
      *
      * @param nums
      * @return
@@ -977,7 +983,7 @@ public class Solution {
     }
 
     /**
-     * 2055. 蜡烛之间的盘子
+     * 2055. Plates Between Candles
      *
      * @param s
      * @param queries
