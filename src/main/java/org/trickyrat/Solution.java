@@ -264,6 +264,7 @@ public class Solution {
 
     /**
      * 357. Count Numbers with Unique Digits
+     *
      * @param n
      * @return
      */
@@ -284,6 +285,7 @@ public class Solution {
 
     /**
      * 386. Lexicographical Numbers
+     *
      * @param n
      * @return
      */
@@ -292,10 +294,10 @@ public class Solution {
         int num = 1;
         for (int i = 0; i < n; ++i) {
             ret.add(num);
-            if(num * 10 <= n) {
+            if (num * 10 <= n) {
                 num *= 10;
             } else {
-                while(num % 10 == 9 || num + 1 > n) {
+                while (num % 10 == 9 || num + 1 > n) {
                     num /= 10;
                 }
                 num++;
@@ -349,14 +351,15 @@ public class Solution {
 
     /**
      * 467. Unique Substrings in Wraparound String
+     *
      * @param p
      * @return
      */
     public int findSubstringInWraparoundString(String p) {
         int[] dp = new int[26];
         int k = 0;
-        for(int i = 0; i < p.length(); ++i) {
-            if(i>0&&(p.charAt(i) - p.charAt(i-1) + 26) % 26 == 1) {
+        for (int i = 0; i < p.length(); ++i) {
+            if (i > 0 && (p.charAt(i) - p.charAt(i - 1) + 26) % 26 == 1) {
                 ++k;
             } else {
                 k = 1;
@@ -518,6 +521,7 @@ public class Solution {
 
     /**
      * 654. Maximum Binary Tree
+     *
      * @param nums
      * @return
      */
@@ -531,7 +535,7 @@ public class Solution {
                 tree[i].left = tree[stack.get(stack.size() - 1)];
                 stack.remove(stack.size() - 1);
             }
-            if(!stack.isEmpty()) {
+            if (!stack.isEmpty()) {
                 tree[stack.get(stack.size() - 1)].right = tree[i];
             }
             stack.add(i);
@@ -667,6 +671,7 @@ public class Solution {
 
     /**
      * 819. Most Common Word
+     *
      * @param paragraph
      * @param banned
      * @return
@@ -681,11 +686,11 @@ public class Solution {
         StringBuffer sb = new StringBuffer();
         int length = paragraph.length();
         for (int i = 0; i <= length; ++i) {
-            if(i < length && Character.isLetter(paragraph.charAt(i))) {
+            if (i < length && Character.isLetter(paragraph.charAt(i))) {
                 sb.append(Character.toLowerCase(paragraph.charAt(i)));
-            } else if(sb.length() > 0) {
+            } else if (sb.length() > 0) {
                 String word = sb.toString();
-                if(!bannedSet.contains(word)) {
+                if (!bannedSet.contains(word)) {
                     int frequency = frequencies.getOrDefault(word, 0) + 1;
                     frequencies.put(word, frequency);
                     maxFrequency = Math.max(maxFrequency, frequency);
@@ -776,19 +781,20 @@ public class Solution {
 
     /**
      * 905. Sort Array By Parity
+     *
      * @param nums
      * @return
      */
     public int[] sortArrayByParity(int[] nums) {
         int left = 0, right = nums.length - 1;
-        while(left < right) {
-            while(left < right && nums[left] % 2 == 0) {
+        while (left < right) {
+            while (left < right && nums[left] % 2 == 0) {
                 left++;
             }
-            while(left < right && nums[right] % 2 == 1) {
+            while (left < right && nums[right] % 2 == 1) {
                 right++;
             }
-            if(left < right) {
+            if (left < right) {
                 int temp = nums[left];
                 nums[left] = nums[right];
                 nums[right] = temp;
@@ -801,6 +807,7 @@ public class Solution {
 
     /**
      * 944. Delete Columns to Make Sorted
+     *
      * @param strs
      * @return
      */
@@ -810,7 +817,7 @@ public class Solution {
         int ans = 0;
         for (int j = 0; j < col; ++j) {
             for (int i = 1; i < row; ++i) {
-                if(strs[i-1].charAt(j) > strs[i].charAt(j)) {
+                if (strs[i - 1].charAt(j) > strs[i].charAt(j)) {
                     ans++;
                     break;
                 }
@@ -821,13 +828,14 @@ public class Solution {
 
     /**
      * 961. N-Repeated Element in Size 2N Array
+     *
      * @param nums
      * @return
      */
     public int repeatedNTimes(int[] nums) {
         Set<Integer> found = new HashSet<Integer>();
-        for(int num : nums) {
-            if(!found.add(num)) {
+        for (int num : nums) {
+            if (!found.add(num)) {
                 return num;
             }
         }
@@ -864,6 +872,7 @@ public class Solution {
 
     /**
      * 1403. Minimum Subsequence in Non-Increasing Order
+     *
      * @param nums
      * @return
      */
@@ -884,14 +893,15 @@ public class Solution {
 
     /**
      * 1408. String Matching in an Array
+     *
      * @param words
      * @return
      */
     public List<String> stringMatching(String[] words) {
         List<String> res = new ArrayList<>();
-        for(int i = 0; i < words.length; ++i) {
-            for(int j = 0; j < words.length; ++j) {
-                if(i != j && words[j].contains(words[i])) {
+        for (int i = 0; i < words.length; ++i) {
+            for (int j = 0; j < words.length; ++j) {
+                if (i != j && words[j].contains(words[i])) {
                     res.add(words[i]);
                     break;
                 }
@@ -901,7 +911,40 @@ public class Solution {
     }
 
     /**
+     * 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence
+     *
+     * @param sentence
+     * @param searchWord
+     * @return
+     */
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        int n = sentence.length(), index = 1, start = 0, end = 0;
+        while (start < n) {
+            while (end < n && sentence.charAt(end) != ' ') {
+                end++;
+            }
+            if (isPrefix(sentence, start, end, searchWord)) {
+                return index;
+            }
+            index++;
+            end++;
+            start = end;
+        }
+        return -1;
+    }
+
+    private boolean isPrefix(String sentence, int start, int end, String searchWord) {
+        for (int i = 0; i < searchWord.length(); ++i) {
+            if (start + i >= end || sentence.charAt(start + i) != searchWord.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * 1576. Replace All ?'s to Avoid Consecutive Repeating Characters
+     *
      * @param s
      * @return
      */
@@ -925,6 +968,7 @@ public class Solution {
 
     /**
      * 1823. Find the Winner of the Circular Game
+     *
      * @param n
      * @param k
      * @return
@@ -986,6 +1030,7 @@ public class Solution {
         dfs(0, 0);
         return cnt;
     }
+
     int[] nums;
     int maxOr, cnt;
 
