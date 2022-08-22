@@ -1,5 +1,7 @@
 package org.trickyrat;
 
+import com.sun.source.tree.Tree;
+
 import java.util.*;
 
 public class Solution {
@@ -541,6 +543,81 @@ public class Solution {
             stack.add(i);
         }
         return tree[stack.get(0)];
+    }
+
+    class Tuple {
+        TreeNode node;
+        int row;
+        int column;
+
+        public Tuple(TreeNode node, int row, int column) {
+            this.node = node;
+            this.row = row;
+            this.column = column;
+        }
+    }
+
+    /**
+     * 655. Print Binary Tree
+     *
+     * @param root
+     * @return
+     */
+    public List<List<String>> printTree(TreeNode root) {
+        int height = calculateDepth(root);
+        int m = height + 1;
+        int n = (1 << (height + 1)) - 1;
+        List<List<String>> res = new ArrayList<>();
+        for(int i = 0; i < m; ++i) {
+            List<String> row = new ArrayList<>();
+            for(int j = 0; j < n; ++j) {
+                row.add("");
+            }
+            res.add(row);
+        }
+        Queue<Tuple> queue = new ArrayDeque<>();
+        queue.offer(new Tuple(root, 0, (n - 1) / 2));
+        while(!queue.isEmpty()) {
+            Tuple temp = queue.poll();
+            TreeNode node = temp.node;
+            int row = temp.row;
+            int column = temp.column;
+            res.get(row).set(column, Integer.toString(node.val));
+            if(node.left != null) {
+                queue.offer(new Tuple(node.left, row + 1, column - (1 << (height - row - 1))));
+            }
+            if(node.right != null) {
+                queue.offer(new Tuple(node.right, row + 1, column + (1 << (height - row -1))));
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Calculate the depth of a binary tree
+     *
+     * @param root
+     * @return
+     */
+    private int calculateDepth(TreeNode root) {
+        int res = -1;
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int len = queue.size();
+            res++;
+            while (len > 0) {
+                len--;
+                TreeNode temp = queue.poll();
+                if (temp.left != null) {
+                    queue.offer(temp.left);
+                }
+                if (temp.right != null) {
+                    queue.offer(temp.right);
+                }
+            }
+        }
+        return res;
     }
 
     /**
