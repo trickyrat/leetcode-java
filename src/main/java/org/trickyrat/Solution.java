@@ -1020,6 +1020,18 @@ public class Solution {
     }
 
     /**
+     * 1460. Make Two Arrays Equal by Reversing Sub-arrays
+     * @param target
+     * @param arr
+     * @return
+     */
+    public boolean canBeEqual(int[] target, int[] arr) {
+        Arrays.sort(target);
+        Arrays.sort(arr);
+        return Arrays.equals(target, arr);
+    }
+
+    /**
      * 1576. Replace All ?'s to Avoid Consecutive Repeating Characters
      *
      * @param s
