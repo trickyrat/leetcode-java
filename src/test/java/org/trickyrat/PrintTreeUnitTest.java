@@ -14,9 +14,9 @@ public class PrintTreeUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(TreeNode root, List<List<String>> expect) {
+    public void test(TreeNode root, List<List<String>> expected) {
         List<List<String>> actual = solution.printTree(root);
-        Assertions.assertIterableEquals(expect, actual);
+        Assertions.assertIterableEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {

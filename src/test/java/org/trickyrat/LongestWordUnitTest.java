@@ -12,9 +12,9 @@ public class LongestWordUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(String[] ops, String expect) {
+    public void test(String[] ops, String expected) {
         String actual = solution.longestWord(ops);
-        Assertions.assertEquals(expect, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {

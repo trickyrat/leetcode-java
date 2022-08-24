@@ -12,9 +12,9 @@ public class UniqueMorseRepresentationsUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(String[] words, int expect) {
+    public void test(String[] words, int expected) {
         int actual = solution.uniqueMorseRepresentations(words);
-        Assertions.assertEquals(expect, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {

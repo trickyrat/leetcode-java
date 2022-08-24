@@ -11,13 +11,12 @@ import java.util.stream.Stream;
 
 public class MinSubsequenceUnitTest {
     private final Solution solution = new Solution();
-    private static final Utilities util = new Utilities();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int[] input, List<Integer> expect) {
+    public void test(int[] input, List<Integer> expected) {
         List<Integer> actual = solution.minSubsequence(input);
-        Assertions.assertIterableEquals(expect, actual);
+        Assertions.assertIterableEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {

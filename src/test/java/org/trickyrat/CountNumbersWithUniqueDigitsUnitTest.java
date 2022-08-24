@@ -12,9 +12,9 @@ public class CountNumbersWithUniqueDigitsUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int input, int expect) {
+    public void test(int input, int expected) {
         int actual = solution.countNumbersWithUniqueDigits(input);
-        Assertions.assertEquals(expect, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {

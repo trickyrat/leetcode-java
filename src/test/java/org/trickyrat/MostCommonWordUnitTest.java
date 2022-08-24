@@ -12,9 +12,9 @@ public class MostCommonWordUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(String words, String[] banned, String expect) {
+    public void test(String words, String[] banned, String expected) {
         String actual = solution.mostCommonWord(words, banned);
-        Assertions.assertEquals(expect, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
