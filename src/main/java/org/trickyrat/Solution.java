@@ -1,7 +1,5 @@
 package org.trickyrat;
 
-import com.sun.source.tree.Tree;
-
 import java.util.*;
 
 public class Solution {
@@ -112,7 +110,7 @@ public class Solution {
             return s;
         }
         int t = 2 * r - 2;
-        StringBuffer ans = new StringBuffer();
+        StringBuilder ans = new StringBuilder();
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < n - i; j += t) {
                 ans.append(s.charAt(j + i));
@@ -184,8 +182,8 @@ public class Solution {
      * @return
      */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> ans = new ArrayList<List<Integer>>();
-        List<Integer> combine = new ArrayList<Integer>();
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> combine = new ArrayList<>();
         dfs(candidates, target, ans, combine, 0);
         return ans;
     }
@@ -195,7 +193,7 @@ public class Solution {
             return;
         }
         if (target == 0) {
-            ans.add(new ArrayList<Integer>(combine));
+            ans.add(new ArrayList<>(combine));
             return;
         }
         dfs(candidates, target, ans, combine, idx + 1);
@@ -257,7 +255,7 @@ public class Solution {
         path.offerLast(root.val);
         targetNum -= root.val;
         if (root.left == null && root.right == null && targetNum == 0) {
-            ret.add(new LinkedList<Integer>(path));
+            ret.add(new LinkedList<>(path));
         }
         dfs(root.left, targetNum);
         dfs(root.right, targetNum);
@@ -316,17 +314,17 @@ public class Solution {
      */
     public boolean validUtf8(int[] data) {
         int n = 0;
-        for (int i = 0; i < data.length; i++) {
+        for (int datum : data) {
             if (n > 0) {
-                if (data[i] >> 6 != 2) return false;
+                if (datum >> 6 != 2) return false;
                 n--;
-            } else if (data[i] >> 7 == 0) {
+            } else if (datum >> 7 == 0) {
                 n = 0;
-            } else if (data[i] >> 5 == 0b110) {
+            } else if (datum >> 5 == 0b110) {
                 n = 1;
-            } else if (data[i] >> 4 == 0b1110) {
+            } else if (datum >> 4 == 0b1110) {
                 n = 2;
-            } else if (data[i] >> 3 == 0b11110) {
+            } else if (datum >> 3 == 0b11110) {
                 n = 3;
             } else {
                 return false;
@@ -383,7 +381,7 @@ public class Solution {
         }
         boolean negative = num < 0;
         num = Math.abs(num);
-        StringBuffer digits = new StringBuffer();
+        StringBuilder digits = new StringBuilder();
         while (num > 0) {
             digits.append(num % 7);
             num /= 7;
@@ -413,8 +411,8 @@ public class Solution {
      * @return
      */
     public String complexNumberMultiply(String num1, String num2) {
-        String[] complex1 = num1.split("\\+|i");
-        String[] complex2 = num2.split("\\+|i");
+        String[] complex1 = num1.split("[+i]");
+        String[] complex2 = num2.split("[+i]");
         int real1 = Integer.parseInt(complex1[0]);
         int real2 = Integer.parseInt(complex1[0]);
         int imag1 = Integer.parseInt(complex1[1]);
@@ -434,9 +432,9 @@ public class Solution {
             return String.valueOf(nums[0]);
         }
         if (n == 2) {
-            return String.valueOf(nums[0]) + "/" + String.valueOf(nums[1]);
+            return nums[0] + "/" + nums[1];
         }
-        StringBuffer res = new StringBuffer();
+        StringBuilder res = new StringBuilder();
         res.append(nums[0]);
         res.append("/(");
         res.append(nums[1]);
@@ -518,7 +516,7 @@ public class Solution {
                 }
             }
         }
-        return ret.toArray(new String[ret.size()]);
+        return ret.toArray(new String[0]);
     }
 
     /**
@@ -568,26 +566,26 @@ public class Solution {
         int m = height + 1;
         int n = (1 << (height + 1)) - 1;
         List<List<String>> res = new ArrayList<>();
-        for(int i = 0; i < m; ++i) {
+        for (int i = 0; i < m; ++i) {
             List<String> row = new ArrayList<>();
-            for(int j = 0; j < n; ++j) {
+            for (int j = 0; j < n; ++j) {
                 row.add("");
             }
             res.add(row);
         }
         Queue<Tuple> queue = new ArrayDeque<>();
         queue.offer(new Tuple(root, 0, (n - 1) / 2));
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             Tuple temp = queue.poll();
             TreeNode node = temp.node;
             int row = temp.row;
             int column = temp.column;
             res.get(row).set(column, Integer.toString(node.val));
-            if(node.left != null) {
+            if (node.left != null) {
                 queue.offer(new Tuple(node.left, row + 1, column - (1 << (height - row - 1))));
             }
-            if(node.right != null) {
-                queue.offer(new Tuple(node.right, row + 1, column + (1 << (height - row -1))));
+            if (node.right != null) {
+                queue.offer(new Tuple(node.right, row + 1, column + (1 << (height - row - 1))));
             }
         }
         return res;
@@ -621,6 +619,47 @@ public class Solution {
     }
 
     /**
+     * 658. Find K Closest Elements
+     *
+     * @param arr
+     * @param k
+     * @param x
+     * @return
+     */
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int right = binarySearch(arr, x);
+        int left = right - 1;
+        int n = arr.length;
+        while (k-- > 0) {
+            if (left < 0) {
+                right++;
+            } else if (right >= n || x - arr[left] <= arr[right] - x) {
+                left--;
+            } else {
+                right++;
+            }
+        }
+        List<Integer> res = new ArrayList<>();
+        for (int i = left + 1; i < right; i++) {
+            res.add(arr[i]);
+        }
+        return res;
+    }
+
+    private int binarySearch(int[] arr, int x) {
+        int low = 0, high = arr.length - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] >= x) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+
+    /**
      * 682. Baseball Game
      *
      * @param ops
@@ -628,26 +667,26 @@ public class Solution {
      */
     public int calPoints(String[] ops) {
         int ret = 0;
-        List<Integer> points = new ArrayList<Integer>();
+        List<Integer> points = new ArrayList<>();
         for (String op : ops) {
             int n = points.size();
             switch (op.charAt(0)) {
-                case '+':
+                case '+' -> {
                     ret += points.get(n - 1) + points.get(n - 2);
                     points.add(points.get(n - 1) + points.get(n - 2));
-                    break;
-                case 'D':
+                }
+                case 'D' -> {
                     ret += 2 * points.get(n - 1);
                     points.add(2 * points.get(n - 1));
-                    break;
-                case 'C':
+                }
+                case 'C' -> {
                     ret -= points.get(n - 1);
                     points.remove(n - 1);
-                    break;
-                default:
+                }
+                default -> {
                     ret += Integer.parseInt(op);
                     points.add(Integer.parseInt(op));
-                    break;
+                }
             }
         }
         return ret;
@@ -755,12 +794,10 @@ public class Solution {
      */
     public String mostCommonWord(String paragraph, String[] banned) {
         Set<String> bannedSet = new HashSet<>();
-        for (String word : banned) {
-            bannedSet.add(word);
-        }
+        bannedSet.addAll(Arrays.asList(banned));
         int maxFrequency = 0;
         Map<String, Integer> frequencies = new HashMap<>();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         int length = paragraph.length();
         for (int i = 0; i <= length; ++i) {
             if (i < length && Character.isLetter(paragraph.charAt(i))) {
@@ -910,7 +947,7 @@ public class Solution {
      * @return
      */
     public int repeatedNTimes(int[] nums) {
-        Set<Integer> found = new HashSet<Integer>();
+        Set<Integer> found = new HashSet<>();
         for (int num : nums) {
             if (!found.add(num)) {
                 return num;
@@ -1021,6 +1058,7 @@ public class Solution {
 
     /**
      * 1460. Make Two Arrays Equal by Reversing Sub-arrays
+     *
      * @param target
      * @param arr
      * @return
@@ -1098,9 +1136,9 @@ public class Solution {
     public int countKDifference(int[] nums, int k) {
         int ans = 0, n = nums.length;
         Map<Integer, Integer> cnt = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            ans += cnt.getOrDefault(nums[i] - k, 0) + cnt.getOrDefault(nums[i] + k, 0);
-            cnt.put(nums[i], cnt.getOrDefault(nums[i], 0) + 1);
+        for (int num : nums) {
+            ans += cnt.getOrDefault(num - k, 0) + cnt.getOrDefault(num + k, 0);
+            cnt.put(num, cnt.getOrDefault(num, 0) + 1);
         }
         return ans;
     }
