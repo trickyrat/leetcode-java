@@ -7,19 +7,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class CountNumbersWithUniqueDigitsUnitTest {
+public class MaxProductUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int input, int expected) {
-        int actual = solution.countNumbersWithUniqueDigits(input);
+    public void test(int[] nums, int expected) {
+        int actual = solution.maxProduct(nums);
         Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(2, 91),
-                Arguments.arguments(0, 1));
+                Arguments.arguments(new int[]{3,4,5,2},12),
+                Arguments.arguments(new int[]{1,5,4,5},16),
+                Arguments.arguments(new int[]{3,7},12)
+                );
     }
 }

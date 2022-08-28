@@ -12,9 +12,9 @@ public class CalPointsUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(String[] ops, int expect) {
+    public void test(String[] ops, int expected) {
         int actual = solution.calPoints(ops);
-        Assertions.assertEquals(expect, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {

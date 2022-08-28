@@ -110,7 +110,7 @@ public class Solution {
             return s;
         }
         int t = 2 * r - 2;
-        StringBuffer ans = new StringBuffer();
+        StringBuilder ans = new StringBuilder();
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < n - i; j += t) {
                 ans.append(s.charAt(j + i));
@@ -182,8 +182,8 @@ public class Solution {
      * @return
      */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> ans = new ArrayList<List<Integer>>();
-        List<Integer> combine = new ArrayList<Integer>();
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> combine = new ArrayList<>();
         dfs(candidates, target, ans, combine, 0);
         return ans;
     }
@@ -193,7 +193,7 @@ public class Solution {
             return;
         }
         if (target == 0) {
-            ans.add(new ArrayList<Integer>(combine));
+            ans.add(new ArrayList<>(combine));
             return;
         }
         dfs(candidates, target, ans, combine, idx + 1);
@@ -255,7 +255,7 @@ public class Solution {
         path.offerLast(root.val);
         targetNum -= root.val;
         if (root.left == null && root.right == null && targetNum == 0) {
-            ret.add(new LinkedList<Integer>(path));
+            ret.add(new LinkedList<>(path));
         }
         dfs(root.left, targetNum);
         dfs(root.right, targetNum);
@@ -264,6 +264,7 @@ public class Solution {
 
     /**
      * 357. Count Numbers with Unique Digits
+     *
      * @param n
      * @return
      */
@@ -284,6 +285,7 @@ public class Solution {
 
     /**
      * 386. Lexicographical Numbers
+     *
      * @param n
      * @return
      */
@@ -292,10 +294,10 @@ public class Solution {
         int num = 1;
         for (int i = 0; i < n; ++i) {
             ret.add(num);
-            if(num * 10 <= n) {
+            if (num * 10 <= n) {
                 num *= 10;
             } else {
-                while(num % 10 == 9 || num + 1 > n) {
+                while (num % 10 == 9 || num + 1 > n) {
                     num /= 10;
                 }
                 num++;
@@ -312,17 +314,17 @@ public class Solution {
      */
     public boolean validUtf8(int[] data) {
         int n = 0;
-        for (int i = 0; i < data.length; i++) {
+        for (int datum : data) {
             if (n > 0) {
-                if (data[i] >> 6 != 2) return false;
+                if (datum >> 6 != 2) return false;
                 n--;
-            } else if (data[i] >> 7 == 0) {
+            } else if (datum >> 7 == 0) {
                 n = 0;
-            } else if (data[i] >> 5 == 0b110) {
+            } else if (datum >> 5 == 0b110) {
                 n = 1;
-            } else if (data[i] >> 4 == 0b1110) {
+            } else if (datum >> 4 == 0b1110) {
                 n = 2;
-            } else if (data[i] >> 3 == 0b11110) {
+            } else if (datum >> 3 == 0b11110) {
                 n = 3;
             } else {
                 return false;
@@ -349,14 +351,15 @@ public class Solution {
 
     /**
      * 467. Unique Substrings in Wraparound String
+     *
      * @param p
      * @return
      */
     public int findSubstringInWraparoundString(String p) {
         int[] dp = new int[26];
         int k = 0;
-        for(int i = 0; i < p.length(); ++i) {
-            if(i>0&&(p.charAt(i) - p.charAt(i-1) + 26) % 26 == 1) {
+        for (int i = 0; i < p.length(); ++i) {
+            if (i > 0 && (p.charAt(i) - p.charAt(i - 1) + 26) % 26 == 1) {
                 ++k;
             } else {
                 k = 1;
@@ -378,7 +381,7 @@ public class Solution {
         }
         boolean negative = num < 0;
         num = Math.abs(num);
-        StringBuffer digits = new StringBuffer();
+        StringBuilder digits = new StringBuilder();
         while (num > 0) {
             digits.append(num % 7);
             num /= 7;
@@ -408,8 +411,8 @@ public class Solution {
      * @return
      */
     public String complexNumberMultiply(String num1, String num2) {
-        String[] complex1 = num1.split("\\+|i");
-        String[] complex2 = num2.split("\\+|i");
+        String[] complex1 = num1.split("[+i]");
+        String[] complex2 = num2.split("[+i]");
         int real1 = Integer.parseInt(complex1[0]);
         int real2 = Integer.parseInt(complex1[0]);
         int imag1 = Integer.parseInt(complex1[1]);
@@ -429,9 +432,9 @@ public class Solution {
             return String.valueOf(nums[0]);
         }
         if (n == 2) {
-            return String.valueOf(nums[0]) + "/" + String.valueOf(nums[1]);
+            return nums[0] + "/" + nums[1];
         }
-        StringBuffer res = new StringBuffer();
+        StringBuilder res = new StringBuilder();
         res.append(nums[0]);
         res.append("/(");
         res.append(nums[1]);
@@ -513,7 +516,171 @@ public class Solution {
                 }
             }
         }
-        return ret.toArray(new String[ret.size()]);
+        return ret.toArray(new String[0]);
+    }
+
+    /**
+     * 654. Maximum Binary Tree
+     *
+     * @param nums
+     * @return
+     */
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        int n = nums.length;
+        List<Integer> stack = new ArrayList<>();
+        TreeNode[] tree = new TreeNode[n];
+        for (int i = 0; i < n; i++) {
+            tree[i] = new TreeNode(nums[i]);
+            while (!stack.isEmpty() && nums[i] > nums[stack.get(stack.size() - 1)]) {
+                tree[i].left = tree[stack.get(stack.size() - 1)];
+                stack.remove(stack.size() - 1);
+            }
+            if (!stack.isEmpty()) {
+                tree[stack.get(stack.size() - 1)].right = tree[i];
+            }
+            stack.add(i);
+        }
+        return tree[stack.get(0)];
+    }
+
+    class Tuple {
+        TreeNode node;
+        int row;
+        int column;
+
+        public Tuple(TreeNode node, int row, int column) {
+            this.node = node;
+            this.row = row;
+            this.column = column;
+        }
+    }
+
+    /**
+     * 655. Print Binary Tree
+     *
+     * @param root
+     * @return
+     */
+    public List<List<String>> printTree(TreeNode root) {
+        int height = calculateDepth(root);
+        int m = height + 1;
+        int n = (1 << (height + 1)) - 1;
+        List<List<String>> res = new ArrayList<>();
+        for (int i = 0; i < m; ++i) {
+            List<String> row = new ArrayList<>();
+            for (int j = 0; j < n; ++j) {
+                row.add("");
+            }
+            res.add(row);
+        }
+        Queue<Tuple> queue = new ArrayDeque<>();
+        queue.offer(new Tuple(root, 0, (n - 1) / 2));
+        while (!queue.isEmpty()) {
+            Tuple temp = queue.poll();
+            TreeNode node = temp.node;
+            int row = temp.row;
+            int column = temp.column;
+            res.get(row).set(column, Integer.toString(node.val));
+            if (node.left != null) {
+                queue.offer(new Tuple(node.left, row + 1, column - (1 << (height - row - 1))));
+            }
+            if (node.right != null) {
+                queue.offer(new Tuple(node.right, row + 1, column + (1 << (height - row - 1))));
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Calculate the depth of a binary tree
+     *
+     * @param root
+     * @return
+     */
+    private int calculateDepth(TreeNode root) {
+        int res = -1;
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int len = queue.size();
+            res++;
+            while (len > 0) {
+                len--;
+                TreeNode temp = queue.poll();
+                if (temp.left != null) {
+                    queue.offer(temp.left);
+                }
+                if (temp.right != null) {
+                    queue.offer(temp.right);
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 658. Find K Closest Elements
+     *
+     * @param arr
+     * @param k
+     * @param x
+     * @return
+     */
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int right = binarySearch(arr, x);
+        int left = right - 1;
+        int n = arr.length;
+        while (k-- > 0) {
+            if (left < 0) {
+                right++;
+            } else if (right >= n || x - arr[left] <= arr[right] - x) {
+                left--;
+            } else {
+                right++;
+            }
+        }
+        List<Integer> res = new ArrayList<>();
+        for (int i = left + 1; i < right; i++) {
+            res.add(arr[i]);
+        }
+        return res;
+    }
+
+    private int binarySearch(int[] arr, int x) {
+        int low = 0, high = arr.length - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] >= x) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+
+    Map<Integer, Integer> levelMin = new HashMap<>();
+
+    private int dfs(TreeNode node, int depth, int index) {
+        if (node == null) {
+            return 0;
+        }
+        levelMin.putIfAbsent(depth, index);
+        return Math.max(index - levelMin.get(depth) + 1,
+                Math.max(
+                        dfs(node.left, depth + 1, index * 2),
+                        dfs(node.right, depth + 1, index * 2 + 1)
+                ));
+    }
+
+    /**
+     * 662. Maximum Width of Binary Tree
+     *
+     * @param root
+     * @return
+     */
+    public int widthOfBinaryTree(TreeNode root) {
+        return dfs(root, 1, 1);
     }
 
     /**
@@ -524,26 +691,26 @@ public class Solution {
      */
     public int calPoints(String[] ops) {
         int ret = 0;
-        List<Integer> points = new ArrayList<Integer>();
+        List<Integer> points = new ArrayList<>();
         for (String op : ops) {
             int n = points.size();
             switch (op.charAt(0)) {
-                case '+':
+                case '+' -> {
                     ret += points.get(n - 1) + points.get(n - 2);
                     points.add(points.get(n - 1) + points.get(n - 2));
-                    break;
-                case 'D':
+                }
+                case 'D' -> {
                     ret += 2 * points.get(n - 1);
                     points.add(2 * points.get(n - 1));
-                    break;
-                case 'C':
+                }
+                case 'C' -> {
                     ret -= points.get(n - 1);
                     points.remove(n - 1);
-                    break;
-                default:
+                }
+                default -> {
                     ret += Integer.parseInt(op);
                     points.add(Integer.parseInt(op));
-                    break;
+                }
             }
         }
         return ret;
@@ -570,6 +737,32 @@ public class Solution {
             }
         }
         return longest;
+    }
+
+    private long zeta(long x) {
+        long res = 0;
+        while (x != 0) {
+            res += x / 5;
+            x /= 5;
+        }
+        return res;
+    }
+
+    private long nx(int x) {
+        long left = 0, right = 5L * x;
+        while (left <= right) {
+            long mid = (left + right) / 2;
+            if (zeta(mid) < x) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return right + 1;
+    }
+
+    public int preimageSizeFZF(int k) {
+        return (int)(nx(k + 1) - nx(k));
     }
 
     /**
@@ -644,25 +837,24 @@ public class Solution {
 
     /**
      * 819. Most Common Word
+     *
      * @param paragraph
      * @param banned
      * @return
      */
     public String mostCommonWord(String paragraph, String[] banned) {
         Set<String> bannedSet = new HashSet<>();
-        for (String word : banned) {
-            bannedSet.add(word);
-        }
+        bannedSet.addAll(Arrays.asList(banned));
         int maxFrequency = 0;
         Map<String, Integer> frequencies = new HashMap<>();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         int length = paragraph.length();
         for (int i = 0; i <= length; ++i) {
-            if(i < length && Character.isLetter(paragraph.charAt(i))) {
+            if (i < length && Character.isLetter(paragraph.charAt(i))) {
                 sb.append(Character.toLowerCase(paragraph.charAt(i)));
-            } else if(sb.length() > 0) {
+            } else if (sb.length() > 0) {
                 String word = sb.toString();
-                if(!bannedSet.contains(word)) {
+                if (!bannedSet.contains(word)) {
                     int frequency = frequencies.getOrDefault(word, 0) + 1;
                     frequencies.put(word, frequency);
                     maxFrequency = Math.max(maxFrequency, frequency);
@@ -753,19 +945,20 @@ public class Solution {
 
     /**
      * 905. Sort Array By Parity
+     *
      * @param nums
      * @return
      */
     public int[] sortArrayByParity(int[] nums) {
         int left = 0, right = nums.length - 1;
-        while(left < right) {
-            while(left < right && nums[left] % 2 == 0) {
+        while (left < right) {
+            while (left < right && nums[left] % 2 == 0) {
                 left++;
             }
-            while(left < right && nums[right] % 2 == 1) {
+            while (left < right && nums[right] % 2 == 1) {
                 right++;
             }
-            if(left < right) {
+            if (left < right) {
                 int temp = nums[left];
                 nums[left] = nums[right];
                 nums[right] = temp;
@@ -778,6 +971,7 @@ public class Solution {
 
     /**
      * 944. Delete Columns to Make Sorted
+     *
      * @param strs
      * @return
      */
@@ -787,7 +981,7 @@ public class Solution {
         int ans = 0;
         for (int j = 0; j < col; ++j) {
             for (int i = 1; i < row; ++i) {
-                if(strs[i-1].charAt(j) > strs[i].charAt(j)) {
+                if (strs[i - 1].charAt(j) > strs[i].charAt(j)) {
                     ans++;
                     break;
                 }
@@ -798,13 +992,14 @@ public class Solution {
 
     /**
      * 961. N-Repeated Element in Size 2N Array
+     *
      * @param nums
      * @return
      */
     public int repeatedNTimes(int[] nums) {
-        Set<Integer> found = new HashSet<Integer>();
-        for(int num : nums) {
-            if(!found.add(num)) {
+        Set<Integer> found = new HashSet<>();
+        for (int num : nums) {
+            if (!found.add(num)) {
                 return num;
             }
         }
@@ -841,6 +1036,7 @@ public class Solution {
 
     /**
      * 1403. Minimum Subsequence in Non-Increasing Order
+     *
      * @param nums
      * @return
      */
@@ -861,14 +1057,15 @@ public class Solution {
 
     /**
      * 1408. String Matching in an Array
+     *
      * @param words
      * @return
      */
     public List<String> stringMatching(String[] words) {
         List<String> res = new ArrayList<>();
-        for(int i = 0; i < words.length; ++i) {
-            for(int j = 0; j < words.length; ++j) {
-                if(i != j && words[j].contains(words[i])) {
+        for (int i = 0; i < words.length; ++i) {
+            for (int j = 0; j < words.length; ++j) {
+                if (i != j && words[j].contains(words[i])) {
                     res.add(words[i]);
                     break;
                 }
@@ -878,7 +1075,77 @@ public class Solution {
     }
 
     /**
+     * 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence
+     *
+     * @param sentence
+     * @param searchWord
+     * @return
+     */
+    public int isPrefixOfWord(String sentence, String searchWord) {
+        int n = sentence.length(), index = 1, start = 0, end = 0;
+        while (start < n) {
+            while (end < n && sentence.charAt(end) != ' ') {
+                end++;
+            }
+            if (isPrefix(sentence, start, end, searchWord)) {
+                return index;
+            }
+            index++;
+            end++;
+            start = end;
+        }
+        return -1;
+    }
+
+    private boolean isPrefix(String sentence, int start, int end, String searchWord) {
+        for (int i = 0; i < searchWord.length(); ++i) {
+            if (start + i >= end || sentence.charAt(start + i) != searchWord.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 1460. Make Two Arrays Equal by Reversing Sub-arrays
+     *
+     * @param target
+     * @param arr
+     * @return
+     */
+    public boolean canBeEqual(int[] target, int[] arr) {
+        Arrays.sort(target);
+        Arrays.sort(arr);
+        return Arrays.equals(target, arr);
+    }
+
+    /**
+     * 1464. Maximum Product of Two Elements in an Array
+     *
+     * @param nums
+     * @return
+     */
+    public int maxProduct(int[] nums) {
+        int a = nums[0], b = nums[1];
+        if (a < b) {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+        for (int i = 2; i < nums.length; i++) {
+            if (nums[i] > a) {
+                b = a;
+                a = nums[i];
+            } else if (nums[i] > b) {
+                b = nums[i];
+            }
+        }
+        return (a - 1) * (b - 1);
+    }
+
+    /**
      * 1576. Replace All ?'s to Avoid Consecutive Repeating Characters
+     *
      * @param s
      * @return
      */
@@ -899,9 +1166,9 @@ public class Solution {
         return new String(arr);
     }
 
-
     /**
      * 1823. Find the Winner of the Circular Game
+     *
      * @param n
      * @param k
      * @return
@@ -942,9 +1209,9 @@ public class Solution {
     public int countKDifference(int[] nums, int k) {
         int ans = 0, n = nums.length;
         Map<Integer, Integer> cnt = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            ans += cnt.getOrDefault(nums[i] - k, 0) + cnt.getOrDefault(nums[i] + k, 0);
-            cnt.put(nums[i], cnt.getOrDefault(nums[i], 0) + 1);
+        for (int num : nums) {
+            ans += cnt.getOrDefault(num - k, 0) + cnt.getOrDefault(num + k, 0);
+            cnt.put(num, cnt.getOrDefault(num, 0) + 1);
         }
         return ans;
     }
@@ -963,6 +1230,7 @@ public class Solution {
         dfs(0, 0);
         return cnt;
     }
+
     int[] nums;
     int maxOr, cnt;
 

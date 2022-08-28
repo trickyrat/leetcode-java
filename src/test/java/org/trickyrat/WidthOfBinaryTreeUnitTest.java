@@ -7,19 +7,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class CountNumbersWithUniqueDigitsUnitTest {
+public class WidthOfBinaryTreeUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int input, int expected) {
-        int actual = solution.countNumbersWithUniqueDigits(input);
+    public void test(TreeNode root, int expected) {
+        int actual = solution.widthOfBinaryTree(root);
         Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(2, 91),
-                Arguments.arguments(0, 1));
+                Arguments.arguments(Utilities.createTreeNodeIteratively("1,3,2,5,3,null,9"), 4),
+                Arguments.arguments(Utilities.createTreeNodeIteratively("1,3,2,5,null,null,9,6,null,7"), 7),
+                Arguments.arguments(Utilities.createTreeNodeIteratively("1,3,2,5"), 2)
+        );
     }
 }

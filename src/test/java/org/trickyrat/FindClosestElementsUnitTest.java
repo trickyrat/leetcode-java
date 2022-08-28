@@ -9,20 +9,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class MinSubsequenceUnitTest {
+public class FindClosestElementsUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int[] input, List<Integer> expected) {
-        List<Integer> actual = solution.minSubsequence(input);
+    public void test(int[] arr, int k, int x, List<Integer> expected) {
+        var actual = solution.findClosestElements(arr, k, x);
         Assertions.assertIterableEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(new int[]{4, 3, 10, 9, 8}, Arrays.asList(10, 9)),
-                Arguments.arguments(new int[]{4, 4, 7, 6, 7}, Arrays.asList(7, 7, 6)),
-                Arguments.arguments(new int[]{6}, Arrays.asList(6)));
+                Arguments.arguments(new int[]{1, 2, 3, 4, 5}, 4, 3, Arrays.asList(1, 2, 3, 4)),
+                Arguments.arguments(new int[]{1, 2, 3, 4, 5}, 4, -1, Arrays.asList(1, 2, 3, 4))
+        );
     }
 }

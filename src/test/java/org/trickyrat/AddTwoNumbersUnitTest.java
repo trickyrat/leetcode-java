@@ -12,9 +12,9 @@ public class AddTwoNumbersUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(ListNode l1, ListNode l2, ListNode expect) {
+    public void test(ListNode l1, ListNode l2, ListNode expected) {
         ListNode actual = solution.addTwoNumbers(l1, l2);
-        Assertions.assertEquals(expect, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {

@@ -7,19 +7,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class CountNumbersWithUniqueDigitsUnitTest {
+public class IsPrefixOfWordUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int input, int expected) {
-        int actual = solution.countNumbersWithUniqueDigits(input);
+    public void test(String sentence, String searchWord, int expected) {
+        int actual = solution.isPrefixOfWord(sentence, searchWord);
         Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(2, 91),
-                Arguments.arguments(0, 1));
+                Arguments.arguments("i love eating burger", "burg", 4),
+                Arguments.arguments("this problem is an easy problem", "pro", 2),
+                Arguments.arguments("i am tired", "you", -1)
+                );
     }
 }

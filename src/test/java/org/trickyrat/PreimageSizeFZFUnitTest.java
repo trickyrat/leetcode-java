@@ -7,19 +7,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class CountNumbersWithUniqueDigitsUnitTest {
+public class PreimageSizeFZFUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int input, int expected) {
-        int actual = solution.countNumbersWithUniqueDigits(input);
+    public void test(int k, int expected) {
+        int actual = solution.preimageSizeFZF(k);
         Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(2, 91),
-                Arguments.arguments(0, 1));
+                Arguments.arguments(0, 5),
+                Arguments.arguments(5, 0),
+                Arguments.arguments(3, 5)
+        );
     }
 }
