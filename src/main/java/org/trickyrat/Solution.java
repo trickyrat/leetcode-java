@@ -1070,6 +1070,29 @@ public class Solution {
     }
 
     /**
+     * 1464. Maximum Product of Two Elements in an Array
+     * @param nums
+     * @return
+     */
+    public int maxProduct(int[] nums) {
+        int a = nums[0], b = nums[1];
+        if (a < b) {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
+        for (int i = 2; i < nums.length; i++) {
+            if (nums[i] > a) {
+                b = a;
+                a = nums[i];
+            } else if (nums[i] > b) {
+                b = nums[i];
+            }
+        }
+        return (a - 1) * (b - 1);
+    }
+
+    /**
      * 1576. Replace All ?'s to Avoid Consecutive Repeating Characters
      *
      * @param s
@@ -1091,7 +1114,6 @@ public class Solution {
         }
         return new String(arr);
     }
-
 
     /**
      * 1823. Find the Winner of the Circular Game
