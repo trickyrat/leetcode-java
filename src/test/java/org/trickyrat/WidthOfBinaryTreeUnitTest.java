@@ -7,19 +7,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class ConstructMaximumBinaryTreeUnitTest {
+public class WidthOfBinaryTreeUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(int[] input, TreeNode expected) {
-        TreeNode actual = solution.constructMaximumBinaryTree(input);
+    public void test(TreeNode root, int expected) {
+        int actual = solution.widthOfBinaryTree(root);
         Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(new int[]{3,2,1,6,0,5}, Utilities.createTreeNodeIteratively("6,3,5,null,2,0,null,null,1")),
-                Arguments.arguments(new int[]{3,2,1}, Utilities.createTreeNodeIteratively("3,null,2,null,1")));
+                Arguments.arguments(Utilities.createTreeNodeIteratively("1,3,2,5,3,null,9"), 4),
+                Arguments.arguments(Utilities.createTreeNodeIteratively("1,3,2,5,null,null,9,6,null,7"), 7),
+                Arguments.arguments(Utilities.createTreeNodeIteratively("1,3,2,5"), 2)
+        );
     }
 }

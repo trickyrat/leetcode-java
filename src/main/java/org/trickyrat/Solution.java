@@ -659,6 +659,27 @@ public class Solution {
         return low;
     }
 
+    Map<Integer, Integer> levelMin = new HashMap<>();
+    private int dfs(TreeNode node, int depth, int index) {
+        if (node == null) {
+            return 0;
+        }
+        levelMin.putIfAbsent(depth, index);
+        return Math.max(index - levelMin.get(depth) + 1,
+                Math.max(
+                        dfs(node.left, depth+1,index*2),
+                        dfs(node.right, depth+1,index*2+1)
+                ));
+    }
+    /**
+     * 662. Maximum Width of Binary Tree
+     * @param root
+     * @return
+     */
+    public int widthOfBinaryTree(TreeNode root) {
+        return dfs(root, 1, 1);
+    }
+
     /**
      * 682. Baseball Game
      *

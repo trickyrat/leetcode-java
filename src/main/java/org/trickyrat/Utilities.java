@@ -1,9 +1,7 @@
 package org.trickyrat;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Utilities {
     /**
@@ -21,7 +19,7 @@ public class Utilities {
         return head.next;
     }
 
-    public static TreeNode createTreeNodeWithBFS(String data) {
+    public static TreeNode createTreeNodeIteratively(String data) {
         String[] nums = data.split(",");
         if (nums[0].equals("null")) {
             return null;
@@ -53,6 +51,52 @@ public class Utilities {
             index += 2;
         }
         return root;
+    }
+
+//    public static TreeNode createTreeNodeIteratively(List<OptionalInt> nums) {
+//        if (nums.get(0) == null) {
+//            return null;
+//        }
+//        TreeNode root = new TreeNode(nums.get(0).getAsInt());
+//        Queue<TreeNode> queue = new LinkedList<>();
+//        queue.add(root);
+//        int index = 1;
+//        int n = nums.size();
+//        while (index < n) {
+//            TreeNode node = queue.poll();
+//            if (index > n - 1 || nums.get(index) == null) {
+//                node.left = null;
+//            } else {
+//                TreeNode leftNode = new TreeNode(nums.get(index) .getAsInt());
+//                if (node != null) {
+//                    node.left = leftNode;
+//                }
+//                queue.add(leftNode);
+//            }
+//            if (index + 1 > n - 1 || nums.get(index + 1) == null) {
+//                node.right = null;
+//            } else {
+//                TreeNode rightNode = new TreeNode(nums.get(index + 1).getAsInt());
+//                if (node != null) {
+//                    node.right = rightNode;
+//                }
+//                queue.add(rightNode);
+//            }
+//            index += 2;
+//        }
+//        return root;
+//    }
+
+    public static List<OptionalInt> createOptionalArray(Object[] data) {
+        List<OptionalInt> res = new ArrayList<>();
+        for(Object ele : data) {
+            if (ele == null) {
+                res.add(null);
+            } else {
+                res.add(OptionalInt.of((int)ele));
+            }
+        }
+        return res;
     }
 
     public static TreeNode createTreeNodeWithDFS(String data) {
