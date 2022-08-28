@@ -660,6 +660,7 @@ public class Solution {
     }
 
     Map<Integer, Integer> levelMin = new HashMap<>();
+
     private int dfs(TreeNode node, int depth, int index) {
         if (node == null) {
             return 0;
@@ -667,12 +668,14 @@ public class Solution {
         levelMin.putIfAbsent(depth, index);
         return Math.max(index - levelMin.get(depth) + 1,
                 Math.max(
-                        dfs(node.left, depth+1,index*2),
-                        dfs(node.right, depth+1,index*2+1)
+                        dfs(node.left, depth + 1, index * 2),
+                        dfs(node.right, depth + 1, index * 2 + 1)
                 ));
     }
+
     /**
      * 662. Maximum Width of Binary Tree
+     *
      * @param root
      * @return
      */
@@ -734,6 +737,32 @@ public class Solution {
             }
         }
         return longest;
+    }
+
+    private long zeta(long x) {
+        long res = 0;
+        while (x != 0) {
+            res += x / 5;
+            x /= 5;
+        }
+        return res;
+    }
+
+    private long nx(int x) {
+        long left = 0, right = 5L * x;
+        while (left <= right) {
+            long mid = (left + right) / 2;
+            if (zeta(mid) < x) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return right + 1;
+    }
+
+    public int preimageSizeFZF(int k) {
+        return (int)(nx(k + 1) - nx(k));
     }
 
     /**
@@ -1092,6 +1121,7 @@ public class Solution {
 
     /**
      * 1464. Maximum Product of Two Elements in an Array
+     *
      * @param nums
      * @return
      */
