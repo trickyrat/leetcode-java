@@ -762,7 +762,7 @@ public class Solution {
     }
 
     public int preimageSizeFZF(int k) {
-        return (int)(nx(k + 1) - nx(k));
+        return (int) (nx(k + 1) - nx(k));
     }
 
     /**
@@ -1141,6 +1141,22 @@ public class Solution {
             }
         }
         return (a - 1) * (b - 1);
+    }
+
+    /**
+     * 1470. Shuffle the Array
+     *
+     * @param nums
+     * @param n
+     * @return
+     */
+    public int[] shuffle(int[] nums, int n) {
+        int[] res = new int[n * 2];
+        for (int i = 0; i < n; i++) {
+            res[2 * i] = nums[i];
+            res[2 * i + 1] = nums[i + n];
+        }
+        return res;
     }
 
     /**
