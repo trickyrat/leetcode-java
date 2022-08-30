@@ -1,5 +1,7 @@
 package org.trickyrat;
 
+import com.sun.source.tree.Tree;
+
 import java.util.*;
 
 public class Solution {
@@ -1004,6 +1006,32 @@ public class Solution {
             }
         }
         return -1;
+    }
+
+    /**
+     * 998. Maximum Binary Tree II
+     *
+     * @param root
+     * @param val
+     * @return
+     */
+    public TreeNode insertIntoMaxTree(TreeNode root, int val) {
+        TreeNode parent = null;
+        TreeNode curr = root;
+        while (curr != null) {
+            if (val > curr.val) {
+                if (parent == null) {
+                    return new TreeNode(val, root, null);
+                }
+                parent.right = new TreeNode(val, curr, null);
+                return root;
+            } else {
+                parent = curr;
+                curr = curr.right;
+            }
+        }
+        parent.right = new TreeNode(val);
+        return root;
     }
 
     /**
