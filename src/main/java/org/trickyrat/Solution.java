@@ -762,7 +762,7 @@ public class Solution {
     }
 
     public int preimageSizeFZF(int k) {
-        return (int)(nx(k + 1) - nx(k));
+        return (int) (nx(k + 1) - nx(k));
     }
 
     /**
@@ -991,6 +991,25 @@ public class Solution {
     }
 
     /**
+     * 946. Validate Stack Sequences
+     * @param pushed
+     * @param popped
+     * @return
+     */
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int n = pushed.length;
+        for(int i = 0, j = 0; i < n; ++i) {
+            stack.push(pushed[i]);
+            while(!stack.isEmpty() && stack.peek() == popped[j]) {
+                stack.pop();
+                j++;
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    /**
      * 961. N-Repeated Element in Size 2N Array
      *
      * @param nums
@@ -1004,6 +1023,32 @@ public class Solution {
             }
         }
         return -1;
+    }
+
+    /**
+     * 998. Maximum Binary Tree II
+     *
+     * @param root
+     * @param val
+     * @return
+     */
+    public TreeNode insertIntoMaxTree(TreeNode root, int val) {
+        TreeNode parent = null;
+        TreeNode curr = root;
+        while (curr != null) {
+            if (val > curr.val) {
+                if (parent == null) {
+                    return new TreeNode(val, root, null);
+                }
+                parent.right = new TreeNode(val, curr, null);
+                return root;
+            } else {
+                parent = curr;
+                curr = curr.right;
+            }
+        }
+        parent.right = new TreeNode(val);
+        return root;
     }
 
     /**
@@ -1141,6 +1186,22 @@ public class Solution {
             }
         }
         return (a - 1) * (b - 1);
+    }
+
+    /**
+     * 1470. Shuffle the Array
+     *
+     * @param nums
+     * @param n
+     * @return
+     */
+    public int[] shuffle(int[] nums, int n) {
+        int[] res = new int[n * 2];
+        for (int i = 0; i < n; i++) {
+            res[2 * i] = nums[i];
+            res[2 * i + 1] = nums[i + n];
+        }
+        return res;
     }
 
     /**
