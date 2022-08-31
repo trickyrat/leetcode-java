@@ -1,7 +1,5 @@
 package org.trickyrat;
 
-import com.sun.source.tree.Tree;
-
 import java.util.*;
 
 public class Solution {
@@ -990,6 +988,25 @@ public class Solution {
             }
         }
         return ans;
+    }
+
+    /**
+     * 946. Validate Stack Sequences
+     * @param pushed
+     * @param popped
+     * @return
+     */
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        int n = pushed.length;
+        for(int i = 0, j = 0; i < n; ++i) {
+            stack.push(pushed[i]);
+            while(!stack.isEmpty() && stack.peek() == popped[j]) {
+                stack.pop();
+                j++;
+            }
+        }
+        return stack.isEmpty();
     }
 
     /**
