@@ -1205,6 +1205,25 @@ public class Solution {
     }
 
     /**
+     * 1475. Final Prices With a Special Discount in a Shop
+     * @param prices
+     * @return
+     */
+    public int[] finalPrices(int[] prices) {
+        int n = prices.length;
+        int[] res = new int[n];
+        Stack<Integer> stack = new Stack<>();
+        for(int i = n - 1; i >= 0; --i) {
+            while(!stack.isEmpty() && stack.peek() > prices[i]) {
+                stack.pop();
+            }
+            res[i] = stack.isEmpty() ? prices[i] : prices[i] - stack.peek();
+            stack.push(prices[i]);
+        }
+        return res;
+    }
+
+    /**
      * 1576. Replace All ?'s to Avoid Consecutive Repeating Characters
      *
      * @param s
