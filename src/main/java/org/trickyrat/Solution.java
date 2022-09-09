@@ -546,12 +546,12 @@ public class Solution {
     private int findDuplicateSubtreesIndex = 0;
 
     private int findDuplicateSubtreesDfs(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return 0;
         }
         int[] triple = {root.val, findDuplicateSubtreesDfs(root.left), findDuplicateSubtreesDfs(root.right)};
         String hash = Arrays.toString(triple);
-        if(seen.containsKey(hash)) {
+        if (seen.containsKey(hash)) {
             Pair<TreeNode, Integer> pair = seen.get(hash);
             repeat.add(pair.getKey());
             return pair.getValue();
@@ -560,6 +560,7 @@ public class Solution {
             return findDuplicateSubtreesIndex;
         }
     }
+
     public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
         findDuplicateSubtreesDfs(root);
         return new ArrayList<>(repeat);
@@ -731,19 +732,20 @@ public class Solution {
 
     /**
      * 667. Beautiful Arrangement II
+     *
      * @param n
      * @param k
      * @return
      */
     public int[] constructArray(int n, int k) {
         int[] res = new int[n];
-        int index =0;
+        int index = 0;
         for (int i = 1; i < n - k; i++) {
             res[index++] = i;
         }
         for (int i = n - k, j = n; i <= j; i++, j--) {
             res[index++] = i;
-            if(i != j) {
+            if (i != j) {
                 res[index++] = j;
             }
         }
@@ -974,6 +976,7 @@ public class Solution {
 
     /**
      * 828. Count Unique Characters of All Substrings of a Given String
+     *
      * @param s
      * @return
      */
@@ -1408,6 +1411,7 @@ public class Solution {
 
     /**
      * 1592. Rearrange Spaces Between Words
+     *
      * @param text
      * @return
      */
@@ -1440,6 +1444,28 @@ public class Solution {
             sb.append(' ');
         }
         return sb.toString();
+    }
+
+    /**
+     * 1598. Crawler Log Folder
+     *
+     * @param logs
+     * @return
+     */
+    public int minOperations(String[] logs) {
+        int depth = 0;
+        for (String log : logs) {
+            if ("./".equals(log)) {
+                continue;
+            } else if ("../".equals(log)) {
+                if (depth > 0) {
+                    depth--;
+                }
+            } else {
+                depth++;
+            }
+        }
+        return depth;
     }
 
     /**
