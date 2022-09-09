@@ -520,6 +520,23 @@ public class Solution {
     }
 
     /**
+     * 646. Maximum Length of Pair Chain
+     * @param pairs
+     * @return
+     */
+    public int findLongestChain(int[][] pairs) {
+        Arrays.sort(pairs, Comparator.comparingInt(a -> a[1]));
+        int curr = Integer.MIN_VALUE, res = 0;
+        for (int[] p : pairs) {
+            if (curr < p[0]) {
+                curr = p[1];
+                res++;
+            }
+        }
+        return res;
+    }
+
+    /**
      * 654. Maximum Binary Tree
      *
      * @param nums
@@ -1315,7 +1332,7 @@ public class Solution {
      * @return
      */
     public int countKDifference(int[] nums, int k) {
-        int ans = 0, n = nums.length;
+        int ans = 0;
         Map<Integer, Integer> cnt = new HashMap<>();
         for (int num : nums) {
             ans += cnt.getOrDefault(num - k, 0) + cnt.getOrDefault(num + k, 0);
