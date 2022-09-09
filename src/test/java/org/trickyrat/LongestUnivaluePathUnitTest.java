@@ -7,21 +7,20 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-public class WidthOfBinaryTreeUnitTest {
+public class LongestUnivaluePathUnitTest {
     private final Solution solution = new Solution();
 
     @ParameterizedTest
     @MethodSource("getData")
     public void test(TreeNode root, int expected) {
-        int actual = solution.widthOfBinaryTree(root);
+        var actual = solution.longestUnivaluePath(root);
         Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createTreeNode("1,3,2,5,3,null,9"), 4),
-                Arguments.arguments(Utilities.createTreeNode("1,3,2,5,null,null,9,6,null,7"), 7),
-                Arguments.arguments(Utilities.createTreeNode("1,3,2,5"), 2)
+                Arguments.arguments(Utilities.createTreeNode("5,4,5,1,1,null,5"), 2),
+                Arguments.arguments(Utilities.createTreeNode("1,4,5,4,4,null,5"), 2)
         );
     }
 }

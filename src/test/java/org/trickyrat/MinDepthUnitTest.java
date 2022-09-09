@@ -19,7 +19,7 @@ public class MinDepthUnitTest {
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createTreeNodeIteratively("3,9,20,null,null,15,7"), 2),
-                Arguments.arguments(Utilities.createTreeNodeIteratively("2,null,3,null,4,null,5,null,6"), 5));
+                Arguments.arguments(Utilities.createTreeNode("3,9,20,null,null,15,7"), 2),
+                Arguments.arguments(Utilities.createTreeNode("2,null,3,null,4,null,5,null,6"), 5));
     }
 }

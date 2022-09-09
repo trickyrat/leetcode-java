@@ -716,6 +716,34 @@ public class Solution {
         return ret;
     }
 
+    private int longestUnivaluePathDfsRes;
+    private int longestUnivaluePathDfs(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        int left = longestUnivaluePathDfs(root.left), right = longestUnivaluePathDfs(root.right);
+        int left1 = 0, right1 = 0;
+        if(root.left != null && root.left.val == root.val) {
+            left1 = left + 1;
+        }
+        if(root.right != null && root.right.val == root.val) {
+            right1 = right + 1;
+        }
+        longestUnivaluePathDfsRes = Math.max(longestUnivaluePathDfsRes, left1 + right1);
+        return Math.max(left1, right1);
+    }
+
+    /**
+     * 687. Longest Univalue Path
+     * @param root
+     * @return
+     */
+    public int longestUnivaluePath(TreeNode root) {
+        longestUnivaluePathDfsRes = 0;
+        longestUnivaluePathDfs(root);
+        return longestUnivaluePathDfsRes;
+    }
+
     /**
      * 720. Longest Word in Dictionary
      *

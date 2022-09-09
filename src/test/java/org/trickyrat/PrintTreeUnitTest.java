@@ -21,11 +21,11 @@ public class PrintTreeUnitTest {
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createTreeNodeIteratively("1,2"),
+                Arguments.arguments(Utilities.createTreeNode("1,2"),
                         Arrays.asList(
                                 Arrays.asList("", "1", ""),
                                 Arrays.asList("2", "", ""))),
-                Arguments.arguments(Utilities.createTreeNodeIteratively("1,2,3,null,4"),
+                Arguments.arguments(Utilities.createTreeNode("1,2,3,null,4"),
                         Arrays.asList(Arrays.asList("", "", "", "1", "", "", ""),
                                 Arrays.asList("", "2", "", "", "", "3", ""),
                                 Arrays.asList("", "", "4", "", "", "", ""))));

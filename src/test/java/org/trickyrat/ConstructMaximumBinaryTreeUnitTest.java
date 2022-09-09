@@ -19,7 +19,7 @@ public class ConstructMaximumBinaryTreeUnitTest {
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(new int[]{3,2,1,6,0,5}, Utilities.createTreeNodeIteratively("6,3,5,null,2,0,null,null,1")),
-                Arguments.arguments(new int[]{3,2,1}, Utilities.createTreeNodeIteratively("3,null,2,null,1")));
+                Arguments.arguments(new int[]{3,2,1,6,0,5}, Utilities.createTreeNode("6,3,5,null,2,0,null,null,1")),
+                Arguments.arguments(new int[]{3,2,1}, Utilities.createTreeNode("3,null,2,null,1")));
     }
 }
