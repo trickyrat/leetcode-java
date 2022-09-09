@@ -1386,6 +1386,42 @@ public class Solution {
     }
 
     /**
+     * 1592. Rearrange Spaces Between Words
+     * @param text
+     * @return
+     */
+    public String reorderSpaces(String text) {
+        int length = text.length();
+        String[] words = text.trim().split("\\s+");
+        int spaceCount = length;
+        for (String word : words) {
+            spaceCount -= word.length();
+        }
+        StringBuilder sb = new StringBuilder();
+        if (words.length == 1) {
+            sb.append(words[0]);
+            for (int i = 0; i < spaceCount; i++) {
+                sb.append(' ');
+            }
+            return sb.toString();
+        }
+        int perSpace = spaceCount / (words.length - 1);
+        int restSpace = spaceCount % (words.length - 1);
+        for (int i = 0; i < words.length; i++) {
+            if (i > 0) {
+                for (int j = 0; j < perSpace; j++) {
+                    sb.append(' ');
+                }
+            }
+            sb.append(words[i]);
+        }
+        for (int i = 0; i < restSpace; i++) {
+            sb.append(' ');
+        }
+        return sb.toString();
+    }
+
+    /**
      * 1823. Find the Winner of the Circular Game
      *
      * @param n
