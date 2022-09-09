@@ -1,6 +1,10 @@
 package org.trickyrat;
 
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.*;
+
 
 public class Solution {
     /**
@@ -535,6 +539,30 @@ public class Solution {
             }
         }
         return res;
+    }
+
+    private Map<String, Pair<TreeNode, Integer>> seen = new HashMap<>();
+    private Set<TreeNode> repeat = new HashSet<>();
+    private int findDuplicateSubtreesIndex = 0;
+
+    private int findDuplicateSubtreesDfs(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        int[] triple = {root.val, findDuplicateSubtreesDfs(root.left), findDuplicateSubtreesDfs(root.right)};
+        String hash = Arrays.toString(triple);
+        if(seen.containsKey(hash)) {
+            Pair<TreeNode, Integer> pair = seen.get(hash);
+            repeat.add(pair.getKey());
+            return pair.getValue();
+        } else {
+            seen.put(hash, new MutablePair<>(root, ++findDuplicateSubtreesIndex));
+            return findDuplicateSubtreesIndex;
+        }
+    }
+    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+        findDuplicateSubtreesDfs(root);
+        return new ArrayList<>(repeat);
     }
 
     /**
