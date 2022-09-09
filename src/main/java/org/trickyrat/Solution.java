@@ -521,6 +521,7 @@ public class Solution {
 
     /**
      * 646. Maximum Length of Pair Chain
+     *
      * @param pairs
      * @return
      */
@@ -734,16 +735,17 @@ public class Solution {
     }
 
     private int longestUnivaluePathDfsRes;
+
     private int longestUnivaluePathDfs(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return 0;
         }
         int left = longestUnivaluePathDfs(root.left), right = longestUnivaluePathDfs(root.right);
         int left1 = 0, right1 = 0;
-        if(root.left != null && root.left.val == root.val) {
+        if (root.left != null && root.left.val == root.val) {
             left1 = left + 1;
         }
-        if(root.right != null && root.right.val == root.val) {
+        if (root.right != null && root.right.val == root.val) {
             right1 = right + 1;
         }
         longestUnivaluePathDfsRes = Math.max(longestUnivaluePathDfsRes, left1 + right1);
@@ -752,6 +754,7 @@ public class Solution {
 
     /**
      * 687. Longest Univalue Path
+     *
      * @param root
      * @return
      */
@@ -1037,6 +1040,7 @@ public class Solution {
 
     /**
      * 946. Validate Stack Sequences
+     *
      * @param pushed
      * @param popped
      * @return
@@ -1044,9 +1048,9 @@ public class Solution {
     public boolean validateStackSequences(int[] pushed, int[] popped) {
         Deque<Integer> stack = new ArrayDeque<>();
         int n = pushed.length;
-        for(int i = 0, j = 0; i < n; ++i) {
+        for (int i = 0, j = 0; i < n; ++i) {
             stack.push(pushed[i]);
-            while(!stack.isEmpty() && stack.peek() == popped[j]) {
+            while (!stack.isEmpty() && stack.peek() == popped[j]) {
                 stack.pop();
                 j++;
             }
@@ -1251,6 +1255,7 @@ public class Solution {
 
     /**
      * 1475. Final Prices With a Special Discount in a Shop
+     *
      * @param prices
      * @return
      */
@@ -1258,8 +1263,8 @@ public class Solution {
         int n = prices.length;
         int[] res = new int[n];
         Stack<Integer> stack = new Stack<>();
-        for(int i = n - 1; i >= 0; --i) {
-            while(!stack.isEmpty() && stack.peek() > prices[i]) {
+        for (int i = n - 1; i >= 0; --i) {
+            while (!stack.isEmpty() && stack.peek() > prices[i]) {
                 stack.pop();
             }
             res[i] = stack.isEmpty() ? prices[i] : prices[i] - stack.peek();
@@ -1289,6 +1294,41 @@ public class Solution {
             }
         }
         return new String(arr);
+    }
+
+    /**
+     * 1582. Special Positions in a Binary Matrix
+     *
+     * @param mat
+     * @return
+     */
+    public int numSpecial(int[][] mat) {
+        int m = mat.length, n = mat[0].length;
+        for (int i = 0; i < m; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 1) {
+                    count++;
+                }
+            }
+            if (i == 0) {
+                count--;
+            }
+            if (count > 0) {
+                for (int j = 0; j < n; j++) {
+                    if (mat[i][j] == 1) {
+                        mat[0][j] += count;
+                    }
+                }
+            }
+        }
+        int sum = 0;
+        for (int num : mat[0]) {
+            if (num == 1) {
+                sum++;
+            }
+        }
+        return sum;
     }
 
     /**
