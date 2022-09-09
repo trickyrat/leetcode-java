@@ -753,6 +753,54 @@ public class Solution {
     }
 
     /**
+     * 669. Trim a Binary Search Tree
+     * @param root
+     * @param low
+     * @param high
+     * @return
+     */
+    public TreeNode trimBST(TreeNode root, int low, int high) {
+        while (root != null && (root.val < low || root.val > high))
+        {
+            if (root.val < low)
+            {
+                root = root.right;
+            }
+            else
+            {
+                root = root.left;
+            }
+        }
+        if (root == null)
+        {
+            return null;
+        }
+        for (TreeNode node = root; node.left != null;)
+        {
+            if (node.left.val < low)
+            {
+                node.left = node.left.right;
+            }
+            else
+            {
+                node = node.left;
+            }
+        }
+        for (TreeNode node = root; node.right != null;)
+        {
+            if (node.right.val > high)
+            {
+                node.right = node.right.left;
+            }
+            else
+            {
+                node = node.right;
+            }
+        }
+        return root;
+    }
+
+    /**
      * 682. Baseball Game
      *
      * @param ops
