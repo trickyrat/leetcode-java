@@ -1118,6 +1118,40 @@ public class Solution {
     }
 
     /**
+     * 857. Minimum Cost to Hire K Workers
+     * @param quality
+     * @param wage
+     * @param k
+     * @return
+     */
+    public double minCostToHireWorkers(int[] quality, int[] wage, int k) {
+        int n = quality.length;
+        Integer[] hire = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            hire[i] = i;
+        }
+        Arrays.sort(hire, (a, b) -> {
+            return quality[b] * wage[a] - quality[a] * wage[b];
+        });
+        double res = 1e9;
+        double totalQuality = 0.0;
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>((a, b) -> b - a);
+        for (int i = 0; i < k - 1; i++) {
+            totalQuality += quality[hire[i]];
+            pq.offer(quality[hire[i]]);
+        }
+        for (int i = k - 1; i < n; i++) {
+            int index = hire[i];
+            totalQuality += quality[index];
+            pq.offer(quality[index]);
+            double totalc = ((double) wage[index] / quality[index]) * totalQuality;
+            res = Math.min(res, totalc);
+            totalQuality -= pq.poll();
+        }
+        return res;
+    }
+
+    /**
      * 905. Sort Array By Parity
      *
      * @param nums
