@@ -754,46 +754,34 @@ public class Solution {
 
     /**
      * 669. Trim a Binary Search Tree
+     *
      * @param root
      * @param low
      * @param high
      * @return
      */
     public TreeNode trimBST(TreeNode root, int low, int high) {
-        while (root != null && (root.val < low || root.val > high))
-        {
-            if (root.val < low)
-            {
+        while (root != null && (root.val < low || root.val > high)) {
+            if (root.val < low) {
                 root = root.right;
-            }
-            else
-            {
+            } else {
                 root = root.left;
             }
         }
-        if (root == null)
-        {
+        if (root == null) {
             return null;
         }
-        for (TreeNode node = root; node.left != null;)
-        {
-            if (node.left.val < low)
-            {
+        for (TreeNode node = root; node.left != null; ) {
+            if (node.left.val < low) {
                 node.left = node.left.right;
-            }
-            else
-            {
+            } else {
                 node = node.left;
             }
         }
-        for (TreeNode node = root; node.right != null;)
-        {
-            if (node.right.val > high)
-            {
+        for (TreeNode node = root; node.right != null; ) {
+            if (node.right.val > high) {
                 node.right = node.right.left;
-            }
-            else
-            {
+            } else {
                 node = node.right;
             }
         }
@@ -1119,6 +1107,7 @@ public class Solution {
 
     /**
      * 857. Minimum Cost to Hire K Workers
+     *
      * @param quality
      * @param wage
      * @param k
@@ -1548,6 +1537,23 @@ public class Solution {
             }
         }
         return depth;
+    }
+
+    /**
+     * 1608. Special Array With X Elements Greater Than or Equal X
+     *
+     * @param nums
+     * @return
+     */
+    public int specialArray(int[] nums) {
+        Arrays.stream(nums).boxed().sorted((a, b) -> b - a).mapToInt(x -> x).toArray();
+        int n = nums.length;
+        for (int i = 1; i <= n; i++) {
+            if (nums[i - 1] >= i && (i == n || nums[i] < i)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**

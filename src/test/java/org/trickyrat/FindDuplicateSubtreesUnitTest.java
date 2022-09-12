@@ -25,8 +25,8 @@ public class FindDuplicateSubtreesUnitTest {
                 Arguments.arguments(
                         Utilities.createTreeNode("1,2,3,4,null,2,4,null,null,4"),
                         Arrays.asList(
-                                Utilities.createTreeNode("2,4"),
-                                Utilities.createTreeNode("4")
+                                Utilities.createTreeNode("4"),
+                                Utilities.createTreeNode("2,4")
                         )),
                 Arguments.arguments(
                         Utilities.createTreeNode("2,1,1"),
