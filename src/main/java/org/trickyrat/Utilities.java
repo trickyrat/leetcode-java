@@ -51,4 +51,16 @@ public class Utilities {
         }
         return root;
     }
+
+    public static void swap(char[] chars, int i, int j) {
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+    }
+
+    public static void swap(int[] chars, int i, int j) {
+        int temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+    }
 }

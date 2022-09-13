@@ -789,6 +789,31 @@ public class Solution {
     }
 
     /**
+     * 670. Maximum Swap
+     * @param num
+     * @return
+     */
+    public int maximumSwap(int num) {
+        char[] chars = String.valueOf(num).toCharArray();
+        int n = chars.length;
+        int maxIndex= n - 1;
+        int index1 = - 1, index2 = -1;
+        for (int i = n - 1; i >= 0; --i) {
+            if(chars[i] > chars[maxIndex]) {
+                maxIndex = i;
+            } else if(chars[i] < chars[maxIndex]) {
+                index1 = i;
+                index2 = maxIndex;
+            }
+        }
+        if(index1 >= 0) {
+            Utilities.swap(chars, index1, index2);
+            return Integer.parseInt(new String(chars));
+        }
+        return num;
+    }
+
+    /**
      * 682. Baseball Game
      *
      * @param ops
