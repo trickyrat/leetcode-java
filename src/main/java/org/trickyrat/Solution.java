@@ -790,23 +790,24 @@ public class Solution {
 
     /**
      * 670. Maximum Swap
+     *
      * @param num
      * @return
      */
     public int maximumSwap(int num) {
         char[] chars = String.valueOf(num).toCharArray();
         int n = chars.length;
-        int maxIndex= n - 1;
-        int index1 = - 1, index2 = -1;
+        int maxIndex = n - 1;
+        int index1 = -1, index2 = -1;
         for (int i = n - 1; i >= 0; --i) {
-            if(chars[i] > chars[maxIndex]) {
+            if (chars[i] > chars[maxIndex]) {
                 maxIndex = i;
-            } else if(chars[i] < chars[maxIndex]) {
+            } else if (chars[i] < chars[maxIndex]) {
                 index1 = i;
                 index2 = maxIndex;
             }
         }
-        if(index1 >= 0) {
+        if (index1 >= 0) {
             Utilities.swap(chars, index1, index2);
             return Integer.parseInt(new String(chars));
         }
@@ -1579,6 +1580,22 @@ public class Solution {
             }
         }
         return -1;
+    }
+
+    /**
+     * 1619. Mean of Array After Removing Some Elements
+     *
+     * @param arr
+     * @return
+     */
+    public double trimMean(int[] arr) {
+        int n = arr.length;
+        Arrays.sort(arr);
+        int sum = 0;
+        for (int i = n / 20; i < (19 * n / 20); i++) {
+            sum += arr[i];
+        }
+        return sum / (n * 0.9);
     }
 
     /**
