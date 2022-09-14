@@ -815,6 +815,38 @@ public class Solution {
     }
 
     /**
+     * 672. Bulb Switcher II
+     *
+     * @param n
+     * @param presses
+     * @return
+     */
+    public int flipLights(int n, int presses) {
+        Set<Integer> seen = new HashSet<>();
+        for (int i = 0; i < 1 << 4; i++) {
+            int[] pressArray = new int[4];
+            for (int j = 0; j < 4; j++) {
+                pressArray[j] = i >> j & 1;
+            }
+            int sum = Arrays.stream(pressArray).sum();
+            if (sum % 2 == presses % 2 && sum <= presses) {
+                int status = pressArray[0] ^ pressArray[1] ^ pressArray[3];
+                if (n >= 2) {
+                    status |= (pressArray[0] ^ pressArray[1]) << 1;
+                }
+                if (n >= 3) {
+                    status |= (pressArray[0] ^ pressArray[2]) << 2;
+                }
+                if (n >= 4) {
+                    status |= status << 3;
+                }
+                seen.add(status);
+            }
+        }
+        return seen.size();
+    }
+
+    /**
      * 682. Baseball Game
      *
      * @param ops
