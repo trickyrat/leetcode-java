@@ -1631,6 +1631,26 @@ public class Solution {
     }
 
     /**
+     * 1624. Largest Substring Between Two Equal Characters
+     * @param s
+     * @return
+     */
+    public int maxLengthBetweenEqualCharacters(String s) {
+        int[] dic = new int[26];
+        Arrays.fill(dic, -1);
+        int res = -1;
+        for (int i = 0; i < s.length(); i++) {
+            int c = s.charAt(i) - 'a';
+            if (dic[c] < 0) {
+                dic[c] = i;
+            } else {
+                res = Math.max(res, i - dic[c] - 1);
+            }
+        }
+        return res;
+    }
+
+    /**
      * 1823. Find the Winner of the Circular Game
      *
      * @param n
