@@ -1651,6 +1651,31 @@ public class Solution {
     }
 
     /**
+     * 1636. Sort Array by Increasing Frequency
+     * @param nums
+     * @return
+     */
+    public int[] frequencySort(int[] nums) {
+        Map<Integer, Integer> count = new HashMap<>();
+        for(int num : nums) {
+            count.put(num, count.getOrDefault(num, 0) + 1);
+        }
+        List<Integer> list = new ArrayList<>();
+        for(int num : nums) {
+            list.add(num);
+        }
+        Collections.sort(list, (a, b) -> {
+            int count1 = count.get(a), count2 = count.get(b);
+            return count1 != count2 ? count1 - count2 : b - a;
+        });
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            nums[i] = list.get(i);
+        }
+        return nums;
+    }
+
+    /**
      * 1823. Find the Winner of the Circular Game
      *
      * @param n
