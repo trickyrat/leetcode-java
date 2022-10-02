@@ -1712,6 +1712,15 @@ public class Solution {
     }
 
     /**
+     * 1784. Check if Binary String Has at Most One Segment of Ones
+     * @param s
+     * @return
+     */
+    public boolean checkOnesSegment(String s) {
+        return !s.contains("01");
+    }
+
+    /**
      * 1823. Find the Winner of the Circular Game
      *
      * @param n
