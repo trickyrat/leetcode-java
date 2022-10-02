@@ -1696,7 +1696,7 @@ public class Solution {
         StringBuilder res = new StringBuilder();
         while (n > 0) {
             if (n > 4) {
-                res.append(digits.substring(pt, 3) + "-");
+                res.append(digits.substring(pt, pt + 3) + "-");
                 pt += 3;
                 n -= 3;
             } else {
