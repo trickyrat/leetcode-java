@@ -1632,6 +1632,7 @@ public class Solution {
 
     /**
      * 1624. Largest Substring Between Two Equal Characters
+     *
      * @param s
      * @return
      */
@@ -1652,16 +1653,17 @@ public class Solution {
 
     /**
      * 1636. Sort Array by Increasing Frequency
+     *
      * @param nums
      * @return
      */
     public int[] frequencySort(int[] nums) {
         Map<Integer, Integer> count = new HashMap<>();
-        for(int num : nums) {
+        for (int num : nums) {
             count.put(num, count.getOrDefault(num, 0) + 1);
         }
         List<Integer> list = new ArrayList<>();
-        for(int num : nums) {
+        for (int num : nums) {
             list.add(num);
         }
         Collections.sort(list, (a, b) -> {
@@ -1673,6 +1675,40 @@ public class Solution {
             nums[i] = list.get(i);
         }
         return nums;
+    }
+
+    /**
+     * 1694. Reformat Phone Number
+     *
+     * @param number
+     * @return
+     */
+    public String reformatNumber(String number) {
+        StringBuilder digits = new StringBuilder();
+        for (int i = 0; i < number.length(); ++i) {
+            char ch = number.charAt(i);
+            if (Character.isDigit(ch)) {
+                digits.append(ch);
+            }
+        }
+        int n = digits.length();
+        int pt = 0;
+        StringBuilder res = new StringBuilder();
+        while (n > 0) {
+            if (n > 4) {
+                res.append(digits.substring(pt, 3) + "-");
+                pt += 3;
+                n -= 3;
+            } else {
+                if (n == 4) {
+                    res.append(digits.substring(pt, pt + 2) + "-" + digits.substring(pt + 2, pt + 4));
+                } else {
+                    res.append(digits.substring(pt, pt + n));
+                }
+                break;
+            }
+        }
+        return res.toString();
     }
 
     /**
@@ -1724,7 +1760,6 @@ public class Solution {
         }
         return ans;
     }
-
 
     /**
      * 2044. Count Number of Maximum Bitwise-OR Subsets
