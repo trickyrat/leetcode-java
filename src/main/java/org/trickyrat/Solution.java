@@ -961,14 +961,14 @@ public class Solution {
                 j++;
             }
         }
-        while(i < n) {
-            if(start.charAt(i) != 'X') {
+        while (i < n) {
+            if (start.charAt(i) != 'X') {
                 return false;
             }
             i++;
         }
-        while(j < n) {
-            if(end.charAt(j) != 'X') {
+        while (j < n) {
+            if (end.charAt(j) != 'X') {
                 return false;
             }
             j++;
@@ -1272,6 +1272,32 @@ public class Solution {
             }
         }
         return nums;
+    }
+
+    /**
+     * 921. Minimum Add to Make Parentheses Valid
+     *
+     * @param s
+     * @return
+     */
+    public int minAddToMakeValid(String s) {
+        int res = 0;
+        int leftCount = 0;
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
+            if (ch == '(') {
+                leftCount++;
+            } else {
+                if (leftCount > 0) {
+                    leftCount--;
+                } else {
+                    res++;
+                }
+            }
+        }
+        res += leftCount;
+        return res;
     }
 
     /**
