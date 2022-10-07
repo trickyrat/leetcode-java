@@ -932,6 +932,50 @@ public class Solution {
         return longest;
     }
 
+    /**
+     * 777. Swap Adjacent in LR String
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    public boolean canTransform(String start, String end) {
+        int n = start.length();
+        int i = 0, j = 0;
+        while (i < n && j < n) {
+            while (i < n && start.charAt(i) == 'X') {
+                i++;
+            }
+            while (j < n && end.charAt(j) == 'X') {
+                j++;
+            }
+            if (i < n && j < n) {
+                char c = start.charAt(i);
+                if (c != end.charAt(j)) {
+                    return false;
+                }
+                if ((c == 'L' && i < j) || (c == 'R' && i > j)) {
+                    return false;
+                }
+                i++;
+                j++;
+            }
+        }
+        while(i < n) {
+            if(start.charAt(i) != 'X') {
+                return false;
+            }
+            i++;
+        }
+        while(j < n) {
+            if(end.charAt(j) != 'X') {
+                return false;
+            }
+            j++;
+        }
+        return true;
+    }
+
     private long zeta(long x) {
         long res = 0;
         while (x != 0) {
@@ -954,6 +998,12 @@ public class Solution {
         return right + 1;
     }
 
+    /**
+     * 793. Preimage Size of Factorial Zeroes Function
+     *
+     * @param k
+     * @return
+     */
     public int preimageSizeFZF(int k) {
         return (int) (nx(k + 1) - nx(k));
     }
@@ -1713,6 +1763,7 @@ public class Solution {
 
     /**
      * 1784. Check if Binary String Has at Most One Segment of Ones
+     *
      * @param s
      * @return
      */
