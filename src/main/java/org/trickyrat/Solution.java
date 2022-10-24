@@ -1330,6 +1330,48 @@ public class Solution {
     }
 
     /**
+     * 927. Three Equal Parts
+     * @param arr
+     * @return
+     */
+    public int[] threeEqualParts(int[] arr) {
+        int sum = Arrays.stream(arr).sum();
+        int[] errorArray = new int[]{-1, -1};
+        if (sum % 3 != 0) {
+            return errorArray;
+        }
+        if (sum == 0) {
+            return new int[]{0, 2};
+        }
+        int partial = sum / 3;
+        int first = 0, second = 0, third = 0, curr = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 1) {
+                if (curr == 0) {
+                    first = i;
+                } else if (curr == partial) {
+                    second = i;
+                } else if (curr == 2 * partial) {
+                    third = i;
+                }
+                curr++;
+            }
+        }
+        int len = arr.length - third;
+        if (first + len <= second && second + len <= third) {
+            int i = 0;
+            while (third + i < arr.length) {
+                if (arr[first + i] != arr[second + i] || arr[first + i] != arr[third + i]) {
+                    return errorArray;
+                }
+                i++;
+            }
+            return new int[]{first + len - 1, second + len};
+        }
+        return errorArray;
+    }
+
+    /**
      * 944. Delete Columns to Make Sorted
      *
      * @param strs
