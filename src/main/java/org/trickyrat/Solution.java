@@ -1079,6 +1079,35 @@ public class Solution {
     }
 
     /**
+     * 811. Subdomain Visit Count
+     * @param cpdomains
+     * @return
+     */
+    public List<String> subdomainVisits(String[] cpdomains) {
+        List<String> res = new ArrayList<>();
+        Map<String, Integer> counter = new HashMap<>();
+        for (String cpdomain : cpdomains) {
+            int space = cpdomain.indexOf(' ');
+            int count = Integer.parseInt(cpdomain.substring(0, space));
+            String domain = cpdomain.substring(space + 1);
+            counter.put(domain, counter.getOrDefault(domain, 0) + count);
+            for (int i = 0; i < domain.length(); i++) {
+                if (domain.charAt(i) == '.') {
+                    String subdomain = domain.substring(i + 1);
+                    counter.put(subdomain, counter.getOrDefault(subdomain, 0) + count);
+                }
+            }
+        }
+        for (Map.Entry<String, Integer> entry : counter.entrySet()
+        ) {
+            String subdomain = entry.getKey();
+            int count = entry.getValue();
+            res.add(count + " " + subdomain);
+        }
+        return res;
+    }
+
+    /**
      * 819. Most Common Word
      *
      * @param paragraph
