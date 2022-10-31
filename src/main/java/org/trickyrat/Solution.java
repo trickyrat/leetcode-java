@@ -1278,6 +1278,37 @@ public class Solution {
     }
 
     /**
+     * 870. Advantage Shuffle
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public int[] advantageCount(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        Integer[] index1 = new Integer[n];
+        Integer[] index2 = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            index1[i] = i;
+            index2[i] = i;
+        }
+        Arrays.sort(index1, Comparator.comparingInt(i -> nums1[i]));
+        Arrays.sort(index2, Comparator.comparingInt(i -> nums2[i]));
+
+        int[] res = new int[n];
+        int left = 0, right = n - 1;
+        for (int i = 0; i < n; i++) {
+            if (nums1[index1[i]] > nums2[index2[left]]) {
+                res[index2[left]] = nums1[index1[i]];
+                left++;
+            } else {
+                res[index2[right]] = nums1[index1[i]];
+                right--;
+            }
+        }
+        return res;
+    }
+
+    /**
      * 905. Sort Array By Parity
      *
      * @param nums
