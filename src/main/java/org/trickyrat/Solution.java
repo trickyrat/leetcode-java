@@ -1080,6 +1080,7 @@ public class Solution {
 
     /**
      * 811. Subdomain Visit Count
+     *
      * @param cpdomains
      * @return
      */
@@ -1243,6 +1244,23 @@ public class Solution {
     }
 
     /**
+     * 856. Score of Parentheses
+     *
+     * @param s
+     * @return
+     */
+    public int scoreOfParentheses(String s) {
+        int bal = 0, n = s.length(), res = 0;
+        for (int i = 0; i < n; i++) {
+            bal += (s.charAt(i) == '(' ? 1 : -1);
+            if (s.charAt(i) == ')' && s.charAt(i - 1) == '(') {
+                res += 1 << bal;
+            }
+        }
+        return res;
+    }
+
+    /**
      * 857. Minimum Cost to Hire K Workers
      *
      * @param quality
@@ -1279,6 +1297,7 @@ public class Solution {
 
     /**
      * 870. Advantage Shuffle
+     *
      * @param nums1
      * @param nums2
      * @return
@@ -1362,6 +1381,7 @@ public class Solution {
 
     /**
      * 927. Three Equal Parts
+     *
      * @param arr
      * @return
      */
