@@ -1944,6 +1944,32 @@ public class Solution {
     }
 
     /**
+     * 1790. Check if One String Swap Can Make Strings Equal
+     * @param s1
+     * @param s2
+     * @return
+     */
+    public boolean areAlmostEqual(String s1, String s2) {
+        int n = s1.length();
+        List<Integer> diff = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (s1.charAt(i) != s2.charAt(i)) {
+                if (diff.size() >= 2) {
+                    return false;
+                }
+                diff.add(i);
+            }
+        }
+        if (diff.isEmpty()) {
+            return true;
+        }
+        if (diff.size() != 2) {
+            return false;
+        }
+        return s1.charAt(diff.get(0)) == s2.charAt(diff.get(1)) && s1.charAt(diff.get(1)) == s2.charAt(diff.get(0));
+    }
+
+    /**
      * 1823. Find the Winner of the Circular Game
      *
      * @param n
