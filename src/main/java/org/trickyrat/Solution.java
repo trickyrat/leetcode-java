@@ -993,6 +993,22 @@ public class Solution {
         return true;
     }
 
+    /**
+     * 779. K-th Symbol in Grammar
+     * @param n
+     * @param k
+     * @return
+     */
+    public int kthGrammar(int n, int k) {
+        k--;
+        int res = 0;
+        while (k > 0) {
+            k &= k - 1;
+            res ^= 1;
+        }
+        return res;
+    }
+
     private long zeta(long x) {
         long res = 0;
         while (x != 0) {
