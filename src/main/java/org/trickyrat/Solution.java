@@ -1433,6 +1433,29 @@ public class Solution {
     }
 
     /**
+     * 904. Fruit Into Baskets
+     * @param fruits
+     * @return
+     */
+    public int totalFruit(int[] fruits) {
+        int n = fruits.length;
+        Map<Integer, Integer> counter = new HashMap<>();
+        int left = 0, res = 0;
+        for (int right = 0; right < n; ++right) {
+            counter.put(fruits[right], counter.getOrDefault(fruits[right], 0) + 1);
+            while (counter.size() > 2) {
+                counter.put(fruits[left], counter.get(fruits[left]) - 1);
+                if (counter.get(fruits[left]) == 0) {
+                    counter.remove(fruits[left]);
+                }
+                ++left;
+            }
+            res = Math.max(res, right - left + 1);
+        }
+        return res;
+    }
+
+    /**
      * 905. Sort Array By Parity
      *
      * @param nums
