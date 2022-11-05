@@ -1133,6 +1133,33 @@ public class Solution {
     }
 
     /**
+     * 817. Linked List Components
+     * @param head
+     * @param nums
+     * @return
+     */
+    public int numComponents(ListNode head, int[] nums) {
+        Set<Integer> numsSet = new HashSet<>();
+        for(int num : nums) {
+            numsSet.add(num);
+        }
+        boolean inSet = false;
+        int res = 0;
+        while (head != null) {
+            if (numsSet.contains(head.val)) {
+                if (!inSet) {
+                    inSet = true;
+                    res++;
+                }
+            } else {
+                inSet = false;
+            }
+            head = head.next;
+        }
+        return res;
+    }
+
+    /**
      * 819. Most Common Word
      *
      * @param paragraph
