@@ -934,6 +934,7 @@ public class Solution {
 
     /**
      * 769. Max Chunks To Make Sorted
+     *
      * @param arr
      * @return
      */
@@ -1026,6 +1027,7 @@ public class Solution {
 
     /**
      * 801. Minimum Swaps To Make Sequences Increasing
+     *
      * @param nums1
      * @param nums2
      * @return
@@ -1150,13 +1152,14 @@ public class Solution {
 
     /**
      * 817. Linked List Components
+     *
      * @param head
      * @param nums
      * @return
      */
     public int numComponents(ListNode head, int[] nums) {
         Set<Integer> numsSet = new HashSet<>();
-        for(int num : nums) {
+        for (int num : nums) {
             numsSet.add(num);
         }
         boolean inSet = false;
@@ -1396,6 +1399,7 @@ public class Solution {
 
     /**
      * 886. Possible Bipartition
+     *
      * @param n
      * @return
      */
@@ -1433,7 +1437,61 @@ public class Solution {
     }
 
     /**
+     * 902. Numbers At Most N Given Digit Set
+     *
+     * @param digits
+     * @param n
+     * @return
+     */
+    public int atMostNGivenDigitSet(String[] digits, int n) {
+        String s = Integer.toString(n);
+        int m = digits.length, k = s.length();
+        List<Integer> bits = new ArrayList<>();
+        boolean isLimit = true;
+        for (int i = 0; i < k; i++) {
+            if (!isLimit) {
+                bits.add(m - 1);
+            } else {
+                int selectIndex = -1;
+                for (int j = 0; j < m; j++) {
+                    if (digits[j].charAt(0) <= s.charAt(i)) {
+                        selectIndex = j;
+                    } else {
+                        break;
+                    }
+                }
+                if (selectIndex >= 0) {
+                    bits.add(selectIndex);
+                    if (digits[selectIndex].charAt(0) < s.charAt(i)) {
+                        isLimit = false;
+                    }
+                } else {
+                    int len = bits.size();
+                    while (!bits.isEmpty() && bits.get(bits.size() - 1) == 0) {
+                        bits.remove(bits.size() - 1);
+                    }
+                    if (!bits.isEmpty()) {
+                        bits.set(bits.size() - 1, bits.get(bits.size() - 1) - 1);
+                    } else {
+                        len--;
+                    }
+                    while (bits.size() <= len) {
+                        bits.add(m - 1);
+                    }
+                    isLimit = false;
+                }
+            }
+        }
+        int res = 0;
+        for (int i = 0; i < bits.size(); i++) {
+            res = res * m + (bits.get(i) + 1);
+        }
+        return res;
+    }
+
+    /**
      * 904. Fruit Into Baskets
+     *
      * @param fruits
      * @return
      */
@@ -1552,6 +1610,7 @@ public class Solution {
 
     /**
      * 940. Distinct Subsequences II
+     *
      * @param s
      * @return
      */
@@ -1721,6 +1780,7 @@ public class Solution {
 
     /**
      * 1441. Build an Array With Stack Operations
+     *
      * @param target
      * @param n
      * @return
@@ -2088,6 +2148,7 @@ public class Solution {
 
     /**
      * 1790. Check if One String Swap Can Make Strings Equal
+     *
      * @param s1
      * @param s2
      * @return
