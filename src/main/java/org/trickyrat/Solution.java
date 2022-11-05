@@ -1659,6 +1659,27 @@ public class Solution {
     }
 
     /**
+     * 1441. Build an Array With Stack Operations
+     * @param target
+     * @param n
+     * @return
+     */
+    public List<String> buildArray(int[] target, int n) {
+        int prev = 0;
+        List<String> res = new ArrayList<>();
+        for (int number : target
+        ) {
+            for (int i = 0; i < number - prev - 1; i++) {
+                res.add("Push");
+                res.add("Pop");
+            }
+            res.add("Push");
+            prev = number;
+        }
+        return res;
+    }
+
+    /**
      * 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence
      *
      * @param sentence
