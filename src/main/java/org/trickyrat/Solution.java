@@ -1490,6 +1490,24 @@ public class Solution {
     }
 
     /**
+     * 940. Distinct Subsequences II
+     * @param s
+     * @return
+     */
+    public int distinctSubseqII(String s) {
+        final int MOD = 1000000007;
+        int[] alphas = new int[26];
+        int n = s.length(), res = 0;
+        for (int i = 0; i < n; i++) {
+            int oi = s.charAt(i) - 'a';
+            int prev = alphas[oi];
+            alphas[oi] = (res + 1) % MOD;
+            res = ((res + alphas[oi] - prev) % MOD + MOD) % MOD;
+        }
+        return res;
+    }
+
+    /**
      * 944. Delete Columns to Make Sorted
      *
      * @param strs
