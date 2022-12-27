@@ -995,6 +995,7 @@ public class Solution {
 
     /**
      * 779. K-th Symbol in Grammar
+     *
      * @param n
      * @param k
      * @return
@@ -1557,6 +1558,7 @@ public class Solution {
 
     /**
      * 915. Partition Array into Disjoint Intervals
+     *
      * @param nums
      * @return
      */
@@ -2171,7 +2173,6 @@ public class Solution {
     }
 
     /**
-     *
      * @param students
      * @param sandwiches
      * @return
@@ -2180,7 +2181,7 @@ public class Solution {
         int s1 = Arrays.stream(students).sum();
         int s0 = students.length - s1;
         for (int i = 0; i < sandwiches.length; i++) {
-            if(sandwiches[i] == 0 && s0 > 0) {
+            if (sandwiches[i] == 0 && s0 > 0) {
                 s0--;
             } else if (sandwiches[i] == 1 && s1 > 0) {
                 s1--;
@@ -2193,6 +2194,7 @@ public class Solution {
 
     /**
      * 1768. Merge Strings Alternately
+     *
      * @param word1
      * @param word2
      * @return
@@ -2299,6 +2301,18 @@ public class Solution {
             cnt.put(num, cnt.getOrDefault(num, 0) + 1);
         }
         return ans;
+    }
+
+    /**
+     * 2011. Final Value of Variable After Performing Operations
+     *
+     * @param operations
+     * @return
+     */
+    public int finalValueAfterOperations(String[] operations) {
+        return Arrays.stream(operations)
+                .mapToInt(op -> 44 - op.charAt(1))
+                .sum();
     }
 
     /**
