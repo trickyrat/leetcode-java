@@ -2316,6 +2316,22 @@ public class Solution {
     }
 
     /**
+     * 2027. Minimum Moves to Convert String
+     * @param s
+     * @return
+     */
+    public int minimumMoves(String s) {
+        int count = -1, res = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'X' && i > count) {
+                res++;
+                count = i + 2;
+            }
+        }
+        return res;
+    }
+
+    /**
      * 2044. Count Number of Maximum Bitwise-OR Subsets
      *
      * @param nums
