@@ -2383,6 +2383,22 @@ public class Solution {
     }
 
     /**
+     * 2037. Minimum Number of Moves to Seat Everyone
+     * @param seats
+     * @param students
+     * @return
+     */
+    public int minMovesToSeat(int[] seats, int[] students) {
+        Arrays.sort(seats);
+        Arrays.sort(students);
+        int res = 0;
+        for (int i = 0; i < seats.length; i++) {
+            res += Math.abs(seats[i] - students[i]);
+        }
+        return res;
+    }
+
+    /**
      * 2044. Count Number of Maximum Bitwise-OR Subsets
      *
      * @param nums
