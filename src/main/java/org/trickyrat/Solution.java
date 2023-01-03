@@ -2398,6 +2398,26 @@ public class Solution {
         return res;
     }
 
+    public boolean areNumberAscending(String s) {
+        int prev = 0, pos = 0, n = s.length();
+        while (pos < n) {
+            if (Character.isDigit(s.charAt(pos))) {
+                int curr = 0;
+                while (pos < n && Character.isDigit(s.charAt(pos))) {
+                    curr = curr * 10 + s.charAt(pos) - '0';
+                    pos++;
+                }
+                if (curr <= prev) {
+                    return false;
+                }
+                prev = curr;
+            } else {
+                pos++;
+            }
+        }
+        return true;
+    }
+
     /**
      * 2044. Count Number of Maximum Bitwise-OR Subsets
      *
