@@ -2196,6 +2196,7 @@ public class Solution {
 
     /**
      * 1750. Minimum Length of String After Deleting Similar Ends
+     *
      * @param s
      * @return
      */
@@ -2277,6 +2278,7 @@ public class Solution {
 
     /**
      * 1802. Maximum Value at a Given Index in a Bounded Array
+     *
      * @param n
      * @param index
      * @param maxSum
@@ -2306,7 +2308,8 @@ public class Solution {
             double c = right + 1 + (-left - 1) * left / 2 - maxSum;
             return (int) Math.floor((-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
         } else {
-            double a = left + right + 1;;
+            double a = left + right + 1;
+            ;
             double b = (-left * left - left - right * right - right) / 2 - maxSum;
             return (int) Math.floor(-b / a);
         }
@@ -2393,6 +2396,7 @@ public class Solution {
 
     /**
      * 2032. Two Out of Three
+     *
      * @param nums1
      * @param nums2
      * @param nums3
@@ -2410,7 +2414,7 @@ public class Solution {
             map.put(i, map.getOrDefault(i, 0) | 4);
         }
         List<Integer> res = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry: map.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             int k = entry.getKey(), v = entry.getValue();
             if ((v & (v - 1)) != 0) {
                 res.add(k);
@@ -2421,6 +2425,7 @@ public class Solution {
 
     /**
      * 2037. Minimum Number of Moves to Seat Everyone
+     *
      * @param seats
      * @param students
      * @return
@@ -2435,6 +2440,12 @@ public class Solution {
         return res;
     }
 
+    /**
+     * 2042. Check if Numbers Are Ascending in a Sentence
+     *
+     * @param s
+     * @return
+     */
     public boolean areNumberAscending(String s) {
         int prev = 0, pos = 0, n = s.length();
         while (pos < n) {
@@ -2526,7 +2537,29 @@ public class Solution {
     }
 
     /**
+     * 2180. Count Integers With Even Digit Sum
+     *
+     * @param num
+     * @return
+     */
+    public int countEven(int num) {
+        int y = num / 10, x = num % 10;
+        int res = y * 5, ySum = 0;
+        while (y > 0) {
+            ySum += y % 10;
+            y /= 10;
+        }
+        if (ySum % 2 == 0) {
+            res += x / 2 + 1;
+        } else {
+            res += (x + 1) / 2;
+        }
+        return res - 1;
+    }
+
+    /**
      * 2351. First Letter to Appear Twice
+     *
      * @param s
      * @return
      */
