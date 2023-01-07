@@ -2139,6 +2139,40 @@ public class Solution {
     }
 
     /**
+     * 1658. Minimum Operations to Reduce X to Zero
+     * @param nums
+     * @param x
+     * @return
+     */
+    public int minOperations(int[] nums, int x) {
+        int n = nums.length;
+        int sum = Arrays.stream(nums).sum();
+
+        if (sum < x) {
+            return -1;
+        }
+
+        int right = 0;
+        int left_sum = 0, right_sum = sum;
+        int res = n + 1;
+
+        for (int left = -1; left < n; ++left) {
+            if (left != -1) {
+                left_sum += nums[left];
+            }
+            while (right < n && left_sum + right_sum > x) {
+                right_sum -= nums[right];
+                ++right;
+            }
+            if (left_sum + right_sum == x) {
+                res = Math.min(res, (left + 1) + (n - right));
+            }
+        }
+
+        return res > n ? -1 : res;
+    }
+
+    /**
      * 1694. Reformat Phone Number
      *
      * @param number
