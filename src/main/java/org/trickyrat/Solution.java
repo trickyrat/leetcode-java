@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 
 public class Solution {
@@ -2589,6 +2590,18 @@ public class Solution {
             res += (x + 1) / 2;
         }
         return res - 1;
+    }
+
+    /**
+     * 2185. Counting Words With a Given Prefix
+     * @param words
+     * @param pref
+     * @return
+     */
+    public int prefixCount(String[] words, String pref) {
+        return (int)Arrays.stream(words)
+                .filter(word -> word.startsWith(pref))
+                .count();
     }
 
     /**
