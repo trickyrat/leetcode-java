@@ -147,6 +147,34 @@ public class Solution {
     }
 
     /**
+     * 23. Merge K Sorted Lists
+     * @param lists
+     * @return
+     */
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode dummy = new ListNode(-1);
+        ListNode p = dummy;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(
+                lists.length, Comparator.comparingInt(a -> a.val)
+        );
+        for (ListNode head: lists) {
+            if (head != null) {
+                pq.add(head);
+            }
+        }
+
+        while (!pq.isEmpty()) {
+            ListNode curr = pq.poll();
+            p.next = curr;
+            if (curr.next != null) {
+                pq.add(curr.next);
+            }
+            p = p.next;
+        }
+        return dummy.next;
+    }
+
+    /**
      * 38. Count And Say
      *
      * @param n
