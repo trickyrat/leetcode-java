@@ -19,7 +19,7 @@ public class RemoveNthFromEndUnitTest {
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createListNode(new int[]{1, 2, 3, 4, 5}), 2, Utilities.createListNode(new int[]{1, 2, 4, 5})),
+                Arguments.arguments(Utilities.createListNode(new int[]{1, 2, 3, 4, 5}), 2, Utilities.createListNode(new int[]{1, 2, 3, 5})),
                 Arguments.arguments(Utilities.createListNode(new int[]{1}), 1, null),
                 Arguments.arguments(Utilities.createListNode(new int[]{1, 2}), 1, Utilities.createListNode(new int[]{1}))
         );
