@@ -4,7 +4,6 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 
 public class Solution {
@@ -366,6 +365,23 @@ public class Solution {
         dfs(root.left, targetNum);
         dfs(root.right, targetNum);
         path.pollLast();
+    }
+
+    /**
+     * 141. Linked List Cycle
+     * @param head
+     * @return
+     */
+    public boolean hasCycle(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
