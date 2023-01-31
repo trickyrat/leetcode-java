@@ -1,7 +1,6 @@
 package org.trickyrat;
 
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
+import javafx.util.Pair;
 
 import java.util.*;
 
@@ -147,6 +146,7 @@ public class Solution {
 
     /**
      * 19. Remove Nth Node From End of List
+     *
      * @param head
      * @param n
      * @return
@@ -167,6 +167,7 @@ public class Solution {
 
     /**
      * 21.Merge Two Sorted List
+     *
      * @param list1
      * @param list2
      * @return
@@ -195,6 +196,7 @@ public class Solution {
 
     /**
      * 23. Merge K Sorted Lists
+     *
      * @param lists
      * @return
      */
@@ -204,7 +206,7 @@ public class Solution {
         PriorityQueue<ListNode> pq = new PriorityQueue<>(
                 lists.length, Comparator.comparingInt(a -> a.val)
         );
-        for (ListNode head: lists) {
+        for (ListNode head : lists) {
             if (head != null) {
                 pq.add(head);
             }
@@ -286,6 +288,7 @@ public class Solution {
 
     /**
      * 86. Partition List
+     *
      * @return
      */
     public ListNode partition(ListNode head, int x) {
@@ -369,6 +372,7 @@ public class Solution {
 
     /**
      * 141. Linked List Cycle
+     *
      * @param head
      * @return
      */
@@ -674,7 +678,7 @@ public class Solution {
             repeat.add(pair.getKey());
             return pair.getValue();
         } else {
-            seen.put(hash, new MutablePair<>(root, ++findDuplicateSubtreesIndex));
+            seen.put(hash, new Pair<>(root, ++findDuplicateSubtreesIndex));
             return findDuplicateSubtreesIndex;
         }
     }
@@ -1534,6 +1538,7 @@ public class Solution {
 
     /**
      * 876. Middle of the Linked List
+     *
      * @param head
      * @return
      */
@@ -2272,6 +2277,7 @@ public class Solution {
 
     /**
      * 1658. Minimum Operations to Reduce X to Zero
+     *
      * @param nums
      * @param x
      * @return
@@ -2725,12 +2731,13 @@ public class Solution {
 
     /**
      * 2185. Counting Words With a Given Prefix
+     *
      * @param words
      * @param pref
      * @return
      */
     public int prefixCount(String[] words, String pref) {
-        return (int)Arrays.stream(words)
+        return (int) Arrays.stream(words)
                 .filter(word -> word.startsWith(pref))
                 .count();
     }
