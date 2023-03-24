@@ -5,6 +5,7 @@ import java.util.*;
 public class Utilities {
     /**
      * Create a ListNode by array.
+     * 
      * @param nums input array
      * @return the head node
      */

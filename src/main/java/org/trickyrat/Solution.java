@@ -4,7 +4,6 @@ import javafx.util.Pair;
 
 import java.util.*;
 
-
 public class Solution {
     /**
      * 1. Two Sum
@@ -108,16 +107,16 @@ public class Solution {
      * @return
      */
     public String zConvert(String s, int numRows) {
-        int n = s.length(), r = numRows;
-        if (r == 1 || r >= n) {
+        int n = s.length();
+        if (numRows == 1 || numRows >= n) {
             return s;
         }
-        int t = 2 * r - 2;
+        int t = 2 * numRows - 2;
         StringBuilder ans = new StringBuilder();
-        for (int i = 0; i < r; i++) {
+        for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < n - i; j += t) {
                 ans.append(s.charAt(j + i));
-                if (0 < i && i < r - 1 && j + t - i < n) {
+                if (0 < i && i < numRows - 1 && j + t - i < n) {
                     ans.append(s.charAt(j + t - i));
                 }
             }
@@ -204,8 +203,7 @@ public class Solution {
         ListNode dummy = new ListNode(-1);
         ListNode p = dummy;
         PriorityQueue<ListNode> pq = new PriorityQueue<>(
-                lists.length, Comparator.comparingInt(a -> a.val)
-        );
+                lists.length, Comparator.comparingInt(a -> a.val));
         for (ListNode head : lists) {
             if (head != null) {
                 pq.add(head);
@@ -225,6 +223,7 @@ public class Solution {
 
     /**
      * 26. Remove Duplicates from Sorted Array
+     * 
      * @param nums
      * @return
      */
@@ -463,7 +462,8 @@ public class Solution {
         int n = 0;
         for (int datum : data) {
             if (n > 0) {
-                if (datum >> 6 != 2) return false;
+                if (datum >> 6 != 2)
+                    return false;
                 n--;
             } else if (datum >> 7 == 0) {
                 n = 0;
@@ -511,7 +511,8 @@ public class Solution {
             } else {
                 k = 1;
             }
-            dp[p.charAt(i) - 'a'] = Math.max(dp[p.charAt(i) - 'a'], k);
+            int index = p.charAt(i) - 'a';
+            dp[index] = Math.max(dp[index], k);
         }
         return Arrays.stream(dp).sum();
     }
@@ -692,7 +693,7 @@ public class Solution {
         if (root == null) {
             return 0;
         }
-        int[] triple = {root.val, findDuplicateSubtreesDfs(root.left), findDuplicateSubtreesDfs(root.right)};
+        int[] triple = { root.val, findDuplicateSubtreesDfs(root.left), findDuplicateSubtreesDfs(root.right) };
         String hash = Arrays.toString(triple);
         if (seen.containsKey(hash)) {
             Pair<TreeNode, Integer> pair = seen.get(hash);
@@ -704,6 +705,11 @@ public class Solution {
         }
     }
 
+    /**
+     * 652. Find Duplicate Subtrees
+     * @param root
+     * @return
+     */
     public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
         findDuplicateSubtreesDfs(root);
         return new ArrayList<>(repeat);
@@ -859,8 +865,7 @@ public class Solution {
         return Math.max(index - levelMin.get(depth) + 1,
                 Math.max(
                         dfs(node.left, depth + 1, index * 2),
-                        dfs(node.right, depth + 1, index * 2 + 1)
-                ));
+                        dfs(node.right, depth + 1, index * 2 + 1)));
     }
 
     /**
@@ -914,14 +919,14 @@ public class Solution {
         if (root == null) {
             return null;
         }
-        for (TreeNode node = root; node.left != null; ) {
+        for (TreeNode node = root; node.left != null;) {
             if (node.left.val < low) {
                 node.left = node.left.right;
             } else {
                 node = node.left;
             }
         }
-        for (TreeNode node = root; node.right != null; ) {
+        for (TreeNode node = root; node.right != null;) {
             if (node.right.val > high) {
                 node.right = node.right.left;
             } else {
@@ -1217,10 +1222,10 @@ public class Solution {
      * @return
      */
     public int uniqueMorseRepresentations(String[] words) {
-        String[] MORSE = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+        String[] MORSE = { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
                 "....", "..", ".---", "-.-", ".-..", "--", "-.",
                 "---", ".--.", "--.-", ".-.", "...", "-", "..-",
-                "...-", ".--", "-..-", "-.--", "--.."};
+                "...-", ".--", "-..-", "-.--", "--.." };
         Set<String> seen = new HashSet<>();
         for (String word : words) {
             StringBuilder code = new StringBuilder();
@@ -1251,7 +1256,7 @@ public class Solution {
                 lines++;
             }
         }
-        return new int[]{lines, width};
+        return new int[] { lines, width };
     }
 
     /**
@@ -1301,8 +1306,7 @@ public class Solution {
                 }
             }
         }
-        for (Map.Entry<String, Integer> entry : counter.entrySet()
-        ) {
+        for (Map.Entry<String, Integer> entry : counter.entrySet()) {
             String subdomain = entry.getKey();
             int count = entry.getValue();
             res.add(count + " " + subdomain);
@@ -1346,8 +1350,7 @@ public class Solution {
      * @return
      */
     public String mostCommonWord(String paragraph, String[] banned) {
-        Set<String> bannedSet = new HashSet<>();
-        bannedSet.addAll(Arrays.asList(banned));
+        Set<String> bannedSet = new HashSet<>(Arrays.asList(banned));
         int maxFrequency = 0;
         Map<String, Integer> frequencies = new HashMap<>();
         StringBuilder sb = new StringBuilder();
@@ -1504,12 +1507,10 @@ public class Solution {
         for (int i = 0; i < n; i++) {
             hire[i] = i;
         }
-        Arrays.sort(hire, (a, b) -> {
-            return quality[b] * wage[a] - quality[a] * wage[b];
-        });
+        Arrays.sort(hire, (a, b) -> quality[b] * wage[a] - quality[a] * wage[b]);
         double res = 1e9;
         double totalQuality = 0.0;
-        PriorityQueue<Integer> pq = new PriorityQueue<Integer>((a, b) -> b - a);
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
         for (int i = 0; i < k - 1; i++) {
             totalQuality += quality[hire[i]];
             pq.offer(quality[hire[i]]);
@@ -1658,8 +1659,8 @@ public class Solution {
             }
         }
         int res = 0;
-        for (int i = 0; i < bits.size(); i++) {
-            res = res * m + (bits.get(i) + 1);
+        for (Integer bit : bits) {
+            res = res * m + (bit + 1);
         }
         return res;
     }
@@ -1767,12 +1768,12 @@ public class Solution {
      */
     public int[] threeEqualParts(int[] arr) {
         int sum = Arrays.stream(arr).sum();
-        int[] errorArray = new int[]{-1, -1};
+        int[] errorArray = new int[] { -1, -1 };
         if (sum % 3 != 0) {
             return errorArray;
         }
         if (sum == 0) {
-            return new int[]{0, 2};
+            return new int[] { 0, 2 };
         }
         int partial = sum / 3;
         int first = 0, second = 0, third = 0, curr = 0;
@@ -1797,7 +1798,7 @@ public class Solution {
                 }
                 i++;
             }
-            return new int[]{first + len - 1, second + len};
+            return new int[] { first + len - 1, second + len };
         }
         return errorArray;
     }
@@ -1982,8 +1983,7 @@ public class Solution {
     public List<String> buildArray(int[] target, int n) {
         int prev = 0;
         List<String> res = new ArrayList<>();
-        for (int number : target
-        ) {
+        for (int number : target) {
             for (int i = 0; i < number - prev - 1; i++) {
                 res.add("Push");
                 res.add("Pop");
@@ -2173,24 +2173,18 @@ public class Solution {
         StringBuilder sb = new StringBuilder();
         if (words.length == 1) {
             sb.append(words[0]);
-            for (int i = 0; i < spaceCount; i++) {
-                sb.append(' ');
-            }
+            sb.append(" ".repeat(Math.max(0, spaceCount)));
             return sb.toString();
         }
         int perSpace = spaceCount / (words.length - 1);
         int restSpace = spaceCount % (words.length - 1);
         for (int i = 0; i < words.length; i++) {
             if (i > 0) {
-                for (int j = 0; j < perSpace; j++) {
-                    sb.append(' ');
-                }
+                sb.append(" ".repeat(Math.max(0, perSpace)));
             }
             sb.append(words[i]);
         }
-        for (int i = 0; i < restSpace; i++) {
-            sb.append(' ');
-        }
+        sb.append(" ".repeat(Math.max(0, restSpace)));
         return sb.toString();
     }
 
@@ -2285,7 +2279,7 @@ public class Solution {
         for (int num : nums) {
             list.add(num);
         }
-        Collections.sort(list, (a, b) -> {
+        list.sort((a, b) -> {
             int count1 = count.get(a), count2 = count.get(b);
             return count1 != count2 ? count1 - count2 : b - a;
         });
@@ -2350,12 +2344,12 @@ public class Solution {
         StringBuilder res = new StringBuilder();
         while (n > 0) {
             if (n > 4) {
-                res.append(digits.substring(pt, pt + 3) + "-");
+                res.append(digits.substring(pt, pt + 3)).append("-");
                 pt += 3;
                 n -= 3;
             } else {
                 if (n == 4) {
-                    res.append(digits.substring(pt, pt + 2) + "-" + digits.substring(pt + 2, pt + 4));
+                    res.append(digits.substring(pt, pt + 2)).append("-").append(digits.substring(pt + 2, pt + 4));
                 } else {
                     res.append(digits.substring(pt, pt + n));
                 }
@@ -2375,10 +2369,10 @@ public class Solution {
     public int countStudents(int[] students, int[] sandwiches) {
         int s1 = Arrays.stream(students).sum();
         int s0 = students.length - s1;
-        for (int i = 0; i < sandwiches.length; i++) {
-            if (sandwiches[i] == 0 && s0 > 0) {
+        for (int sandwich : sandwiches) {
+            if (sandwich == 0 && s0 > 0) {
                 s0--;
-            } else if (sandwiches[i] == 1 && s1 > 0) {
+            } else if (sandwich == 1 && s1 > 0) {
                 s1--;
             } else {
                 break;
@@ -2486,7 +2480,8 @@ public class Solution {
             right = temp;
         }
 
-        double upper = ((double) (left + 1) * (left + 1) - 3 * (left + 1)) / 2 + left + 1 + (left + 1) + ((left + 1) * (left + 1) - 3 * (left + 1)) / 2 + right + 1;
+        double v = ((left + 1) * (left + 1) - 3 * (left + 1)) / 2;
+        double upper = v + left + 1 + (left + 1) + v + right + 1;
         if (upper >= maxSum) {
             double a = 1;
             double b = -2;
@@ -2494,7 +2489,8 @@ public class Solution {
             return (int) Math.floor((-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
         }
 
-        upper = ((double) 2 * (right + 1) - left - 1) * left / 2 + (right + 1) + ((right + 1) * (right + 1) - 3 * (right + 1)) / 2 + right + 1;
+        upper = ((double) 2 * (right + 1) - left - 1) * left / 2 + (right + 1)
+                + ((right + 1) * (right + 1) - 3 * (right + 1)) / 2 + right + 1;
         if (upper >= maxSum) {
             double a = 1.0 / 2;
             double b = left + 1 - 3.0 / 2;
@@ -2502,7 +2498,6 @@ public class Solution {
             return (int) Math.floor((-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
         } else {
             double a = left + right + 1;
-            ;
             double b = (-left * left - left - right * right - right) / 2 - maxSum;
             return (int) Math.floor(-b / a);
         }
