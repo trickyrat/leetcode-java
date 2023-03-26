@@ -244,6 +244,28 @@ public class Solution {
     }
 
     /**
+     * 35. Search Insert Position
+     * 
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int searchInsert(int[] nums, int target) {
+        int n = nums.length;
+        int left = 0, right = n - 1, res = n;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] >= target) {
+                res = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return res;
+    }
+
+    /**
      * 38. Count And Say
      *
      * @param n
@@ -707,6 +729,7 @@ public class Solution {
 
     /**
      * 652. Find Duplicate Subtrees
+     * 
      * @param root
      * @return
      */
