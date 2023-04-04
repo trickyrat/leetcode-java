@@ -558,6 +558,20 @@ public class Solution {
     }
 
     /**
+     * 453. Minimum Moves to Equal Array Elements
+     * @param nums
+     * @return
+     */
+    public int minMoves(int[] nums) {
+        int minNum = Arrays.stream(nums).min().getAsInt();
+        int res = 0;
+        for (int num : nums) {
+            res += num - minNum;
+        }
+        return res;
+    }
+
+    /**
      * 467. Unique Substrings in Wraparound String
      *
      * @param p
