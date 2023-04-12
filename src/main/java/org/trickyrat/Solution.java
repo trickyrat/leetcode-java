@@ -470,6 +470,24 @@ public class Solution {
     }
 
     /**
+     * 283. Move Zeroes
+     * @param nums
+     */
+    public void moveZeroes(int[] nums) {
+        int n = nums.length;
+        int left = 0, right = 0;
+        while (right < n) {
+            if (nums[right] != 0) {
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
+                left++;
+            }
+            right++;
+        }
+    }
+
+    /**
      * 357. Count Numbers with Unique Digits
      *
      * @param n
