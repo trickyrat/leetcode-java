@@ -59,9 +59,9 @@ public class Utilities {
         chars[j] = temp;
     }
 
-    public static void swap(int[] chars, int i, int j) {
-        int temp = chars[i];
-        chars[i] = chars[j];
-        chars[j] = temp;
+    public static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }

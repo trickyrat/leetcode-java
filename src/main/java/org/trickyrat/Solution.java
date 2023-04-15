@@ -469,6 +469,26 @@ public class Solution {
         return false;
     }
 
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            Utilities.swap(nums, start, end);
+            start++;
+            end--;
+        }
+    }
+    /**
+     * 189. Rotate Array
+     * @param nums
+     * @param k
+     */
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k %= n;
+        reverse(nums, 0, n - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, n - 1);
+    }
+
     /**
      * 283. Move Zeroes
      * @param nums
