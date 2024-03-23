@@ -1,8 +1,8 @@
-# Welcome to Leetcodejava
+# Welcome to leetcode-java
 
 ## Introduction
 
-The solutions of Leetcode problems with Java.
+The Leetcode solutions implemented in Java.
 
 ## Getting Started
 
