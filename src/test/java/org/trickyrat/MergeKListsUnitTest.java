@@ -12,18 +12,19 @@ public class MergeKListsUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(ListNode[] lists, ListNode expected) {
-        ListNode actual = solution.mergeKLists(lists);
+    public void test(ListNode[] lists, String expected) {
+        ListNode head = solution.mergeKLists(lists);
+        String actual = Util.convertListNodeToString(head, "->");
         Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
                 Arguments.arguments(new ListNode[]{
-                        Utilities.createListNode(new int[]{1, 4, 5}),
-                        Utilities.createListNode(new int[]{1, 3, 4}),
-                        Utilities.createListNode(new int[]{2, 6})
-                }, Utilities.createListNode(new int[]{1, 1, 2, 3, 4, 4, 5, 6}))
+                        Util.generateListNode(new int[]{1, 4, 5}),
+                        Util.generateListNode(new int[]{1, 3, 4}),
+                        Util.generateListNode(new int[]{2, 6})
+                }, "1->1->2->3->4->4->5->6")
         );
     }
 }

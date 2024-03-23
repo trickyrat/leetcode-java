@@ -12,15 +12,16 @@ public class MiddleNodeUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(ListNode head, ListNode expected) {
-        ListNode actual = solution.middleNode(head);
+    public void test(ListNode head, String expected) {
+        ListNode node = solution.middleNode(head);
+        String actual = Util.convertListNodeToString(node, "->");
         Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createListNode(new int[]{1, 2, 3, 4, 5}), Utilities.createListNode(new int[]{3, 4, 5})),
-                Arguments.arguments(Utilities.createListNode(new int[]{1, 2, 3, 4, 5, 6}), Utilities.createListNode(new int[]{4, 5, 6}))
+                Arguments.arguments(Util.generateListNode(new int[]{1, 2, 3, 4, 5}), "3->4->5"),
+                Arguments.arguments(Util.generateListNode(new int[]{1, 2, 3, 4, 5, 6}), "4->5->6")
         );
     }
 }

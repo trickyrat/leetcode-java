@@ -10,7 +10,7 @@ public class RandomNodeUnitTest {
     @Test
     public void test() {
         List<Integer> results = Arrays.asList(1,2,3,4);
-        RandomNode node = new RandomNode(Utilities.createListNode(new int[]{1, 2, 3}));
+        RandomNode node = new RandomNode(Util.generateListNode(new int[]{1, 2, 3}));
         Assertions.assertTrue(results.contains(node.getRandom()));
         Assertions.assertTrue(results.contains(node.getRandom()));
         Assertions.assertTrue(results.contains(node.getRandom()));

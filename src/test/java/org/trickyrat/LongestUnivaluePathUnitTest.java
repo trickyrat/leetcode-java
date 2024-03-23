@@ -19,8 +19,8 @@ public class LongestUnivaluePathUnitTest {
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createTreeNode("5,4,5,1,1,null,5"), 2),
-                Arguments.arguments(Utilities.createTreeNode("1,4,5,4,4,null,5"), 2)
+                Arguments.arguments(Util.generateTreeNode("5,4,5,1,1,null,5"), 2),
+                Arguments.arguments(Util.generateTreeNode("1,4,5,4,4,null,5"), 2)
         );
     }
 }

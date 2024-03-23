@@ -19,8 +19,8 @@ public class NumComponentsUnitTest {
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createListNode(new int[]{0, 1, 2, 3}), new int[]{0, 1, 3}, 2),
-                Arguments.arguments(Utilities.createListNode(new int[]{0, 1, 2, 3, 4}), new int[]{0, 3, 1, 4}, 2)
+                Arguments.arguments(Util.generateListNode(new int[]{0, 1, 2, 3}), new int[]{0, 1, 3}, 2),
+                Arguments.arguments(Util.generateListNode(new int[]{0, 1, 2, 3, 4}), new int[]{0, 3, 1, 4}, 2)
         );
     }
 }

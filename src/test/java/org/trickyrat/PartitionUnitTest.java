@@ -12,15 +12,16 @@ public class PartitionUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(ListNode head, int x, ListNode expected) {
-        ListNode actual = solution.partition(head, x);
+    public void test(ListNode head, int x, String expected) {
+        ListNode node = solution.partition(head, x);
+        String actual = Util.convertListNodeToString(node, "->");
         Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createListNode(new int[]{1, 4, 3, 2, 5, 2}), 3, Utilities.createListNode(new int[]{1, 2, 2, 4, 3, 5})),
-                Arguments.arguments(Utilities.createListNode(new int[]{2, 1}), 2, Utilities.createListNode(new int[]{1, 2}))
+                Arguments.arguments(Util.generateListNode(new int[]{1, 4, 3, 2, 5, 2}), 3, "1->2->2->4->3->5"),
+                Arguments.arguments(Util.generateListNode(new int[]{2, 1}), 2, "1->2")
         );
     }
 }

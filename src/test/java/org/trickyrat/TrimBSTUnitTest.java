@@ -20,14 +20,14 @@ public class TrimBSTUnitTest {
     static Stream<Arguments> getData() {
         return Stream.of(
                 Arguments.arguments(
-                        Utilities.createTreeNode("1,0,2"),
+                        Util.generateTreeNode("1,0,2"),
                         1, 2,
-                        Utilities.createTreeNode("1,null,2")
+                        Util.generateTreeNode("1,null,2")
                 ),
                 Arguments.arguments(
-                        Utilities.createTreeNode("3,0,4,null,2,null,null,1"),
+                        Util.generateTreeNode("3,0,4,null,2,null,null,1"),
                         1, 3,
-                        Utilities.createTreeNode("3,2,null,1")
+                        Util.generateTreeNode("3,2,null,1")
                 )
         );
     }

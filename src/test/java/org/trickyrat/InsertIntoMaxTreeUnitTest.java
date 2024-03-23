@@ -19,12 +19,12 @@ public class InsertIntoMaxTreeUnitTest {
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createTreeNode("4,1,3,null,null,2"), 5,
-                        Utilities.createTreeNode("5,4,null,1,3,null,null,2")),
-                Arguments.arguments(Utilities.createTreeNode("5,2,4,null,1"), 3,
-                        Utilities.createTreeNode("5,2,4,null,1,null,3")),
-                Arguments.arguments(Utilities.createTreeNode("5,2,3,null,1"), 4,
-                        Utilities.createTreeNode("5,2,4,null,1,3"))
+                Arguments.arguments(Util.generateTreeNode("4,1,3,null,null,2"), 5,
+                        Util.generateTreeNode("5,4,null,1,3,null,null,2")),
+                Arguments.arguments(Util.generateTreeNode("5,2,4,null,1"), 3,
+                        Util.generateTreeNode("5,2,4,null,1,null,3")),
+                Arguments.arguments(Util.generateTreeNode("5,2,3,null,1"), 4,
+                        Util.generateTreeNode("5,2,4,null,1,3"))
         );
     }
 }

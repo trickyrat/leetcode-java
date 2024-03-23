@@ -12,19 +12,20 @@ public class MergeTwoListsUnitTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    public void test(ListNode list1, ListNode list2, ListNode expected) {
-        ListNode actual = solution.mergeTwoSortedLists(list1, list2);
+    public void test(ListNode list1, ListNode list2, String expected) {
+        ListNode head = solution.mergeTwoSortedLists(list1, list2);
+        String actual = Util.convertListNodeToString(head, "->");
         Assertions.assertEquals(expected, actual);
     }
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createListNode(new int[]{1, 2, 4}),
-                        Utilities.createListNode(new int[]{1, 3, 4}),
-                        Utilities.createListNode(new int[]{1, 1, 2, 3, 4, 4})),
-                Arguments.arguments(null, null, null),
-                Arguments.arguments(null, Utilities.createListNode(new int[]{0}),
-                        Utilities.createListNode(new int[]{0}))
+                Arguments.arguments(Util.generateListNode(new int[]{1, 2, 4}),
+                        Util.generateListNode(new int[]{1, 3, 4}),
+                       "1->1->2->3->4->4"),
+                Arguments.arguments(null, null, ""),
+                Arguments.arguments(null, Util.generateListNode(new int[]{0}),
+                        "0")
         );
     }
 }

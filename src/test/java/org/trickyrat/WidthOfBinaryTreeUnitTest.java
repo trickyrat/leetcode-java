@@ -19,9 +19,9 @@ public class WidthOfBinaryTreeUnitTest {
 
     static Stream<Arguments> getData() {
         return Stream.of(
-                Arguments.arguments(Utilities.createTreeNode("1,3,2,5,3,null,9"), 4),
-                Arguments.arguments(Utilities.createTreeNode("1,3,2,5,null,null,9,6,null,7"), 7),
-                Arguments.arguments(Utilities.createTreeNode("1,3,2,5"), 2)
+                Arguments.arguments(Util.generateTreeNode("1,3,2,5,3,null,9"), 4),
+                Arguments.arguments(Util.generateTreeNode("1,3,2,5,null,null,9,6,null,7"), 7),
+                Arguments.arguments(Util.generateTreeNode("1,3,2,5"), 2)
         );
     }
 }

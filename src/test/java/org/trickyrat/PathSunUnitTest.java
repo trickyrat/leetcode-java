@@ -33,9 +33,9 @@ public class PathSunUnitTest {
     elem2.add(4);
     elem2.add(5);
     list.add(elem2);
-    TreeNode root = Utilities.createTreeNode("5,4,8,11,null,13,4,7,2,null,null,5,1");
+    TreeNode root = Util.generateTreeNode("5,4,8,11,null,13,4,7,2,null,null,5,1");
     return Stream.of(
-        Arguments.arguments(Utilities.createTreeNode("1,2,3"), 5, new LinkedList<LinkedList<Integer>>()),
+        Arguments.arguments(Util.generateTreeNode("1,2,3"), 5, new LinkedList<LinkedList<Integer>>()),
         Arguments.arguments(root, 22, list));
   }
 }

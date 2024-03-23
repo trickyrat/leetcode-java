@@ -471,7 +471,7 @@ public class Solution {
 
     private void reverse(int[] nums, int start, int end) {
         while (start < end) {
-            Utilities.swap(nums, start, end);
+            Util.swap(nums, start, end);
             start++;
             end--;
         }
@@ -1092,7 +1092,7 @@ public class Solution {
             }
         }
         if (index1 >= 0) {
-            Utilities.swap(chars, index1, index2);
+            Util.swap(chars, index1, index2);
             return Integer.parseInt(new String(chars));
         }
         return num;

@@ -22,19 +22,19 @@ public class FindDuplicateSubtreesUnitTest {
     static Stream<Arguments> getData() {
         return Stream.of(
                 Arguments.arguments(
-                        Utilities.createTreeNode("1,2,3,4,null,2,4,null,null,4"),
+                        Util.generateTreeNode("1,2,3,4,null,2,4,null,null,4"),
                         Arrays.asList(
-                                Utilities.createTreeNode("4"),
-                                Utilities.createTreeNode("2,4")
+                                Util.generateTreeNode("4"),
+                                Util.generateTreeNode("2,4")
                         )),
                 Arguments.arguments(
-                        Utilities.createTreeNode("2,1,1"),
-                        Arrays.asList(Utilities.createTreeNode("1"))),
+                        Util.generateTreeNode("2,1,1"),
+                        Arrays.asList(Util.generateTreeNode("1"))),
                 Arguments.arguments(
-                        Utilities.createTreeNode("2,2,2,3,null,3,null"),
+                        Util.generateTreeNode("2,2,2,3,null,3,null"),
                         Arrays.asList(
-                                Utilities.createTreeNode("2,3"),
-                                Utilities.createTreeNode("3")
+                                Util.generateTreeNode("2,3"),
+                                Util.generateTreeNode("3")
                         ))
         );
     }
