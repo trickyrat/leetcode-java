@@ -202,8 +202,7 @@ public class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         ListNode dummy = new ListNode(-1);
         ListNode p = dummy;
-        PriorityQueue<ListNode> pq = new PriorityQueue<>(
-                lists.length, Comparator.comparingInt(a -> a.val));
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, Comparator.comparingInt(a -> a.val));
         for (ListNode head : lists) {
             if (head != null) {
                 pq.add(head);
@@ -223,7 +222,7 @@ public class Solution {
 
     /**
      * 26. Remove Duplicates from Sorted Array
-     * 
+     *
      * @param nums
      * @return
      */
@@ -245,7 +244,7 @@ public class Solution {
 
     /**
      * 33. Search in Rotated Sorted Array
-     * 
+     *
      * @param nums
      * @param target
      * @return
@@ -284,7 +283,7 @@ public class Solution {
 
     /**
      * 35. Search Insert Position
-     * 
+     *
      * @param nums
      * @param target
      * @return
@@ -363,7 +362,7 @@ public class Solution {
         if (target - candidates[idx] >= 0) {
             combine.add(candidates[idx]);
             dfs(candidates, target - candidates[idx], ans, combine, idx);
-            combine.remove(combine.size() - 1);
+            combine.removeLast();
         }
     }
 
@@ -476,8 +475,10 @@ public class Solution {
             end--;
         }
     }
+
     /**
      * 189. Rotate Array
+     *
      * @param nums
      * @param k
      */
@@ -491,6 +492,7 @@ public class Solution {
 
     /**
      * 283. Move Zeroes
+     *
      * @param nums
      */
     public void moveZeroes(int[] nums) {
@@ -561,8 +563,7 @@ public class Solution {
         int n = 0;
         for (int datum : data) {
             if (n > 0) {
-                if (datum >> 6 != 2)
-                    return false;
+                if (datum >> 6 != 2) return false;
                 n--;
             } else if (datum >> 7 == 0) {
                 n = 0;
@@ -597,10 +598,14 @@ public class Solution {
 
     /**
      * 453. Minimum Moves to Equal Array Elements
+     *
      * @param nums
      * @return
      */
     public int minMoves(int[] nums) {
+        if (nums.length == 0) {
+            return -1;
+        }
         int minNum = Arrays.stream(nums).min().getAsInt();
         int res = 0;
         for (int num : nums) {
@@ -806,7 +811,7 @@ public class Solution {
         if (root == null) {
             return 0;
         }
-        int[] triple = { root.val, findDuplicateSubtreesDfs(root.left), findDuplicateSubtreesDfs(root.right) };
+        int[] triple = {root.val, findDuplicateSubtreesDfs(root.left), findDuplicateSubtreesDfs(root.right)};
         String hash = Arrays.toString(triple);
         if (seen.containsKey(hash)) {
             Pair<TreeNode, Integer> pair = seen.get(hash);
@@ -820,7 +825,7 @@ public class Solution {
 
     /**
      * 652. Find Duplicate Subtrees
-     * 
+     *
      * @param root
      * @return
      */
@@ -841,16 +846,16 @@ public class Solution {
         TreeNode[] tree = new TreeNode[n];
         for (int i = 0; i < n; i++) {
             tree[i] = new TreeNode(nums[i]);
-            while (!stack.isEmpty() && nums[i] > nums[stack.get(stack.size() - 1)]) {
-                tree[i].left = tree[stack.get(stack.size() - 1)];
-                stack.remove(stack.size() - 1);
+            while (!stack.isEmpty() && nums[i] > nums[stack.getLast()]) {
+                tree[i].left = tree[stack.getLast()];
+                stack.removeLast();
             }
             if (!stack.isEmpty()) {
-                tree[stack.get(stack.size() - 1)].right = tree[i];
+                tree[stack.getLast()].right = tree[i];
             }
             stack.add(i);
         }
-        return tree[stack.get(0)];
+        return tree[stack.getFirst()];
     }
 
     class Tuple {
@@ -917,11 +922,13 @@ public class Solution {
             while (len > 0) {
                 len--;
                 TreeNode temp = queue.poll();
-                if (temp.left != null) {
-                    queue.offer(temp.left);
-                }
-                if (temp.right != null) {
-                    queue.offer(temp.right);
+                if (temp != null) {
+                    if (temp.left != null) {
+                        queue.offer(temp.left);
+                    }
+                    if (temp.right != null) {
+                        queue.offer(temp.right);
+                    }
                 }
             }
         }
@@ -976,10 +983,7 @@ public class Solution {
             return 0;
         }
         levelMin.putIfAbsent(depth, index);
-        return Math.max(index - levelMin.get(depth) + 1,
-                Math.max(
-                        dfs(node.left, depth + 1, index * 2),
-                        dfs(node.right, depth + 1, index * 2 + 1)));
+        return Math.max(index - levelMin.get(depth) + 1, Math.max(dfs(node.left, depth + 1, index * 2), dfs(node.right, depth + 1, index * 2 + 1)));
     }
 
     /**
@@ -994,6 +998,7 @@ public class Solution {
 
     /**
      * 665. Non-decreasing Array
+     *
      * @param nums
      * @return
      */
@@ -1055,14 +1060,14 @@ public class Solution {
         if (root == null) {
             return null;
         }
-        for (TreeNode node = root; node.left != null;) {
+        for (TreeNode node = root; node.left != null; ) {
             if (node.left.val < low) {
                 node.left = node.left.right;
             } else {
                 node = node.left;
             }
         }
-        for (TreeNode node = root; node.right != null;) {
+        for (TreeNode node = root; node.right != null; ) {
             if (node.right.val > high) {
                 node.right = node.right.left;
             } else {
@@ -1207,8 +1212,7 @@ public class Solution {
         String longest = "";
         for (String word : words) {
             if (trie.search(word)) {
-                if (word.length() > longest.length()
-                        || (word.length() == longest.length() && word.compareTo(longest) < 0)) {
+                if (word.length() > longest.length() || (word.length() == longest.length() && word.compareTo(longest) < 0)) {
                     longest = word;
                 }
             }
@@ -1358,10 +1362,7 @@ public class Solution {
      * @return
      */
     public int uniqueMorseRepresentations(String[] words) {
-        String[] MORSE = { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
-                "....", "..", ".---", "-.-", ".-..", "--", "-.",
-                "---", ".--.", "--.-", ".-.", "...", "-", "..-",
-                "...-", ".--", "-..-", "-.--", "--.." };
+        String[] MORSE = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
         Set<String> seen = new HashSet<>();
         for (String word : words) {
             StringBuilder code = new StringBuilder();
@@ -1392,7 +1393,7 @@ public class Solution {
                 lines++;
             }
         }
-        return new int[] { lines, width };
+        return new int[]{lines, width};
     }
 
     /**
@@ -1494,7 +1495,7 @@ public class Solution {
         for (int i = 0; i <= length; ++i) {
             if (i < length && Character.isLetter(paragraph.charAt(i))) {
                 sb.append(Character.toLowerCase(paragraph.charAt(i)));
-            } else if (sb.length() > 0) {
+            } else if (!sb.isEmpty()) {
                 String word = sb.toString();
                 if (!bannedSet.contains(word)) {
                     int frequency = frequencies.getOrDefault(word, 0) + 1;
@@ -1655,8 +1656,8 @@ public class Solution {
             int index = hire[i];
             totalQuality += quality[index];
             pq.offer(quality[index]);
-            double totalc = ((double) wage[index] / quality[index]) * totalQuality;
-            res = Math.min(res, totalc);
+            double total = ((double) wage[index] / quality[index]) * totalQuality;
+            res = Math.min(res, total);
             totalQuality -= pq.poll();
         }
         return res;
@@ -1717,13 +1718,13 @@ public class Solution {
      */
     public boolean possibleBipartition(int n, int[][] dislikes) {
         int[] color = new int[n + 1];
-        List<Integer>[] g = new List[n + 1];
+        List<List<Integer>> g = new ArrayList<>();
         for (int i = 0; i <= n; i++) {
-            g[i] = new ArrayList<>();
+            g.add(new ArrayList<>());
         }
         for (int[] p : dislikes) {
-            g[p[0]].add(p[1]);
-            g[p[1]].add(p[0]);
+            g.get(p[0]).add(p[1]);
+            g.get(p[1]).add(p[0]);
         }
 
         for (int i = 1; i <= n; ++i) {
@@ -1733,7 +1734,7 @@ public class Solution {
                 color[i] = 1;
                 while (!queue.isEmpty()) {
                     int t = queue.poll();
-                    for (int next : g[t]) {
+                    for (int next : g.get(t)) {
                         if (color[next] > 0 && color[next] == color[t]) {
                             return false;
                         }
@@ -1779,11 +1780,11 @@ public class Solution {
                     }
                 } else {
                     int len = bits.size();
-                    while (!bits.isEmpty() && bits.get(bits.size() - 1) == 0) {
-                        bits.remove(bits.size() - 1);
+                    while (!bits.isEmpty() && bits.getLast() == 0) {
+                        bits.removeLast();
                     }
                     if (!bits.isEmpty()) {
-                        bits.set(bits.size() - 1, bits.get(bits.size() - 1) - 1);
+                        bits.set(bits.size() - 1, bits.getLast() - 1);
                     } else {
                         len--;
                     }
@@ -1904,12 +1905,12 @@ public class Solution {
      */
     public int[] threeEqualParts(int[] arr) {
         int sum = Arrays.stream(arr).sum();
-        int[] errorArray = new int[] { -1, -1 };
+        int[] errorArray = new int[]{-1, -1};
         if (sum % 3 != 0) {
             return errorArray;
         }
         if (sum == 0) {
-            return new int[] { 0, 2 };
+            return new int[]{0, 2};
         }
         int partial = sum / 3;
         int first = 0, second = 0, third = 0, curr = 0;
@@ -1934,7 +1935,7 @@ public class Solution {
                 }
                 i++;
             }
-            return new int[] { first + len - 1, second + len };
+            return new int[]{first + len - 1, second + len};
         }
         return errorArray;
     }
@@ -1961,16 +1962,16 @@ public class Solution {
     /**
      * 944. Delete Columns to Make Sorted
      *
-     * @param strs
+     * @param columns
      * @return
      */
-    public int minDeletionSize(String[] strs) {
-        int row = strs.length;
-        int col = strs[0].length();
+    public int minDeletionSize(String[] columns) {
+        int row = columns.length;
+        int col = columns[0].length();
         int ans = 0;
         for (int j = 0; j < col; ++j) {
             for (int i = 1; i < row; ++i) {
-                if (strs[i - 1].charAt(j) > strs[i].charAt(j)) {
+                if (columns[i - 1].charAt(j) > columns[i].charAt(j)) {
                     ans++;
                     break;
                 }
@@ -2037,7 +2038,7 @@ public class Solution {
                 curr = curr.right;
             }
         }
-        parent.right = new TreeNode(val);
+        if (parent != null) parent.right = new TreeNode(val);
         return root;
     }
 
@@ -2353,7 +2354,7 @@ public class Solution {
      * @return
      */
     public int specialArray(int[] nums) {
-        Arrays.stream(nums).boxed().sorted((a, b) -> b - a).mapToInt(x -> x).toArray();
+        nums = Arrays.stream(nums).boxed().sorted((a, b) -> b - a).mapToInt(x -> x).toArray();
         int n = nums.length;
         for (int i = 1; i <= n; i++) {
             if (nums[i - 1] >= i && (i == n || nums[i] < i)) {
@@ -2625,8 +2626,7 @@ public class Solution {
             return (int) Math.floor((-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
         }
 
-        upper = ((double) 2 * (right + 1) - left - 1) * left / 2 + (right + 1)
-                + ((right + 1) * (right + 1) - 3 * (right + 1)) / 2 + right + 1;
+        upper = ((double) 2 * (right + 1) - left - 1) * left / 2 + (right + 1) + ((right + 1) * (right + 1) - 3 * (right + 1)) / 2 + right + 1;
         if (upper >= maxSum) {
             double a = 1.0 / 2;
             double b = left + 1 - 3.0 / 2;
@@ -2696,9 +2696,7 @@ public class Solution {
      * @return
      */
     public int finalValueAfterOperations(String[] operations) {
-        return Arrays.stream(operations)
-                .mapToInt(op -> 44 - op.charAt(1))
-                .sum();
+        return Arrays.stream(operations).mapToInt(op -> 44 - op.charAt(1)).sum();
     }
 
     /**
@@ -2889,9 +2887,7 @@ public class Solution {
      * @return
      */
     public int prefixCount(String[] words, String pref) {
-        return (int) Arrays.stream(words)
-                .filter(word -> word.startsWith(pref))
-                .count();
+        return (int) Arrays.stream(words).filter(word -> word.startsWith(pref)).count();
     }
 
     /**
