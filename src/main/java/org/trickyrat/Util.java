@@ -44,6 +44,15 @@ public class Util {
         return null;
     }
 
+    public static boolean containsTree(List<TreeNode> trees, TreeNode targetTree) {
+		for (TreeNode treeNode : trees) {
+			if (treeNode.equals(targetTree)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
     public static String convertListNodeToString(ListNode head, String separator) {
         StringBuilder ret = new StringBuilder();
         ListNode cycleNode = detectCycle(head);

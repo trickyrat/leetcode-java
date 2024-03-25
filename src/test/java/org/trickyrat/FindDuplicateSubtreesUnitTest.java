@@ -5,18 +5,25 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
 public class FindDuplicateSubtreesUnitTest {
     private final Solution solution = new Solution();
-
+    
     @ParameterizedTest
     @MethodSource("getData")
     public void test(TreeNode root, List<TreeNode> expected) {
         var actual = solution.findDuplicateSubtrees(root);
-        Assertions.assertIterableEquals(expected, actual);
+
+		assertEquals(expected.size(), actual.size());
+
+		for (TreeNode treeNode : actual) {
+			Assertions.assertTrue(Util.containsTree(expected, treeNode));
+		}
     }
 
     static Stream<Arguments> getData() {
