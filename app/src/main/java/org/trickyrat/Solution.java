@@ -663,6 +663,23 @@ public class Solution {
     }
 
     /**
+     * 518. Coin Change II
+     * @param amount
+     * @param coins
+     * @return
+     */
+    public int change(int amount, int[] coins) {
+        var dp = new int[amount + 1];
+        dp[0] = 1;
+        for (int coin : coins) {
+            for (int i = coin; i <= amount; i++) {
+                dp[i] += dp[i - coin];
+            }
+        }
+        return dp[amount];
+    }
+
+    /**
      * 521. Longest Uncommon Subsequence I
      *
      * @param a
