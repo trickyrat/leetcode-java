@@ -2694,6 +2694,29 @@ public class Solution {
     }
 
     /**
+     * 1997. First Day Where You Have Been in All the Rooms
+     * 
+     * @param nextVisit
+     * @return
+     */
+    public int firstDayBeenInAllRooms(int[] nextVisit) {
+        int mod = 1000000007;
+        int n = nextVisit.length;
+        int[] dp = new int[n];
+        dp[0] = 2;
+        for (int i = 1; i < n; i++) {
+            int to = nextVisit[i];
+            dp[i] = 2 + dp[i - 1];
+            if (to != 0) {
+                dp[i] = (dp[i] - dp[to - 1] + mod) % mod;
+            }
+
+            dp[i] = (dp[i] + dp[i - 1]) % mod;
+        }
+        return dp[n - 2];
+    }
+
+    /**
      * 2006. Count Number of Pairs With Absolute Difference K
      *
      * @param nums
@@ -2930,6 +2953,12 @@ public class Solution {
         return ' ';
     }
 
+    /**
+     * 2580. Count Ways to Group Overlapping Ranges
+     * 
+     * @param ranges
+     * @return
+     */
     public int countWays(int[][] ranges) {
         int MOD = 1000000007;
         Arrays.sort(ranges, (a, b) -> a[0] - b[0]);
