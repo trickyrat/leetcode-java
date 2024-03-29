@@ -2976,4 +2976,27 @@ public class Solution {
         }
         return res;
     }
+
+    /**
+     * 2908. Minimum Sum of Mountain Triplets I
+     * @param nums
+     * @return
+     */
+    public int minimumSum(int[] nums) {
+        int n = nums.length, res = 1000, mini = 1000;
+        int[] left = new int[n];
+        int right = nums[n-1];
+        for (int i = 1; i < n; i++) {
+            mini = Math.min(nums[i-1],mini);
+            left[i] = mini;
+        }
+
+        for (int i = n - 2; i > 0; i--) {
+            if (left[i] < nums[i] && nums[i] > right) {
+                res = Math.min(res, left[i] + nums[i] + right);
+            }
+            right = Math.min(right, nums[i]);
+        }
+        return res < 1000 ? res : -1;
+    }
 }
