@@ -2999,4 +2999,25 @@ public class Solution {
         }
         return res < 1000 ? res : -1;
     }
+
+    /**
+     * 2952. Minimum Number of Coins to be Added
+     * @param coins
+     * @param target
+     * @return
+     */
+    public int minimumAddedCoins(int[] coins, int target) {
+        int x = 1, index = 0, res = 0, n = coins.length;
+        Arrays.sort(coins);
+        while (x <= target) {
+            if (index < n && coins[index] <= x) {
+                x += coins[index];
+                index++;
+            } else {
+                x *= 2;
+                res += 1;
+            }
+        }
+        return res;
+    }
 }
