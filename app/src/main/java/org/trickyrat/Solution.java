@@ -2092,6 +2092,30 @@ public class Solution {
     }
 
     /**
+     * 1338. Reduce Array Size to The Half
+     * @param arr
+     * @return
+     */
+    public int minSetSize(int[] arr) {
+        Map<Integer, Integer> frequencies = new HashMap<>();
+        for (int num : arr) {
+            frequencies.put(num, frequencies.getOrDefault(num, 0) + 1);
+        }
+
+        List<Integer> sortedMap = new ArrayList<>(frequencies.values());
+        Collections.sort(sortedMap, Collections.reverseOrder());
+        int count = 0, res = 0;
+        for (int c : sortedMap) {
+            count += c;
+            res += 1;
+            if (count * 2 >= arr.length) {
+                break;
+            }
+        }
+        return res;
+    }
+
+    /**
      * 1380. Lucky Numbers in a Matrix
      *
      * @param matrix
