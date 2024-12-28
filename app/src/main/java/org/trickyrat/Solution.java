@@ -40,44 +40,28 @@ public class Solution {
      * @return
      */
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode res = new ListNode();
-        ListNode resTemp = res;
-        int nextSum = 0;
-        int flag = 0;
-        while (l1 != null & l2 != null) {
-            int p;
-            if (flag == 0) {
-                p = l1.val + l2.val;
-                res.val = p % 10;
-                nextSum = p / 10;
-                flag++;
-            } else {
-                p = l1.val + l2.val + nextSum;
-                resTemp.next = new ListNode(p % 10);
-                resTemp = resTemp.next;
-                nextSum = p / 10;
-            }
-            l1 = l1.next;
-            l2 = l2.next;
+        if (l1 == null && l2 == null) {
+            return null;
         }
-        while (l1 != null) {
-            int p = l1.val + nextSum;
-            resTemp.next = new ListNode(p % 10);
-            resTemp = resTemp.next;
-            nextSum = p / 10;
-            l1 = l1.next;
+
+        ListNode dummyHead = new ListNode(0);
+        ListNode current = dummyHead;
+        int sum = 0, carry = 0;
+        while (l1 != null || l2 != null) {
+            int num1 = l1 == null ? 0 : l1.val;
+            int num2 = l2 == null ? 0 : l2.val;
+            sum = num1 + num2 + carry;
+            current.next = new ListNode(sum % 10);
+            current = current.next;
+            carry = sum / 10;
+            l1 = l1 == null ? l1 : l1.next;
+            l2 = l2 == null ? l2 : l2.next;
         }
-        while (l2 != null) {
-            int p = l2.val + nextSum;
-            resTemp.next = new ListNode(p % 10);
-            resTemp = resTemp.next;
-            nextSum = p / 10;
-            l2 = l2.next;
-        }
-        if (nextSum != 0) {
-            resTemp.next = new ListNode(nextSum);
-        }
-        return res;
+        if (carry > 0) {
+            current.next = new ListNode(carry);
+        };
+
+        return dummyHead.next;
     }
 
     /**
