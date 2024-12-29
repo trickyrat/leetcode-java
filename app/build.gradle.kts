@@ -2,10 +2,6 @@ plugins {
     application
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation(libs.guava)
 }
